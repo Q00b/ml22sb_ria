@@ -6,7 +6,6 @@ define( ['order!backbone', '../model/user'], function( Backbone, UserModel ) {
 
 		initialize : function() {
 			this.fetch();
-			console.log( "fetching" );
-		},
+		}
 	} );
 } );

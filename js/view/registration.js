@@ -28,11 +28,11 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', '../collection/us
 				var regPw = $( '#registration-pw' ).val();
 				var regPwRepeat = $( '#registration-pwrepeat' ).val();
 
-				if ( _.find( this.collection.models, function( cmp_user ) {
+/*				if ( _.find( this.collection.models, function( cmp_user ) {
 					return ( cmp_user.attributes.username == regName );
 				} ) ) {
 					throw new Error( 'Användarnamnet är upptaget.' )
-				}
+				}*/
 
 				if ( !regName || !regName.match( /^[A-z0-9_]{4,20}$/i ) ) {
 					throw new Error( 'Vänligen ange ett giltigt användarnamn (4-20 tecken: A-z 0-9 _).' );

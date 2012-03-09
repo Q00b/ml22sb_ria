@@ -7,6 +7,6 @@ define( ['order!backbone'], function( Backbone ) {
 		defaults : {
 			username : null,
 			password : null
-		},
+		}
 	} );
 } );

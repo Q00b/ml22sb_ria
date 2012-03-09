@@ -1,4 +1,4 @@
-define( ['order!jQuery', 'order!underscore', 'order!backbone', 'view/registration'], function( $, _, Backbone, RegistrationView ) {
+define( ['order!jQuery', 'order!underscore', 'order!backbone', 'auth', 'view/registration', 'view/login'], function( $, _, Backbone, Auth, RegistrationView, LoginView ) {
 	return {
 		run : function() {
 			new this.router();
@@ -8,7 +8,8 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', 'view/registratio
 		router : Backbone.Router.extend( {
 			routes : {
 				'' : 'index',
-				'register' : 'register'
+				'register' : 'register',
+				'login' : 'login'
 			},
 
 			index : function() {
@@ -17,6 +18,10 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', 'view/registratio
 
 			register : function() {
 				new RegistrationView();
+			},
+
+			login : function() {
+				new LoginView();
 			}
 		} )
 	}
