@@ -17,6 +17,12 @@
 					<input type="submit" name="register" id="register" value="Skapa konto" />
 				</fieldset>
 			</form>
+
+			<ul>
+			<% _.each( users, function( users ) { %>
+				<li><%= users.attributes.username %></li>
+			<% } ); %>
+			</ul>
 		</script>
 		<script type="text/template" id="login-template">
 			<form>
