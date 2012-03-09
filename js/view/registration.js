@@ -3,9 +3,13 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', '../collection/us
 		el: $( '#registration' ),
 
 		initialize : function() {
-			this.template = _.template( $( '#registration-template' ).html() );
 			this.collection = new UserCollection();
-			this.collection.bind( "add", this.render, this );
+			this.collection.bind( 'reset', this.render, this );
+			this.collection.bind( 'add', this.render, this );
+
+			this.template = _.template( $( '#registration-template' ).html() );
+			
+			this.render();
 		},
 
 		render : function() {
@@ -24,19 +28,25 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', '../collection/us
 				var regPw = $( '#registration-pw' ).val();
 				var regPwRepeat = $( '#registration-pwrepeat' ).val();
 
+				if ( _.find( this.collection.models, function( cmp_user ) {
+					return ( cmp_user.attributes.username == regName );
+				} ) ) {
+					throw new Error( 'Användarnamnet är upptaget.' )
+				}
+
 				if ( !regName || !regName.match( /^[A-z0-9_]{4,20}$/i ) ) {
-					throw new Error( 'You must specify a valid username (4-20 characters: A-z 0-9 _).' );
+					throw new Error( 'Vänligen ange ett giltigt användarnamn (4-20 tecken: A-z 0-9 _).' );
 				}
 
 				if ( !regPw || !regPwRepeat || !regPw.match( /^\S{4,20}$/i ) ) {
-					throw new Error( 'You must specify a valid password (4-20 non-whitespace characters).' );
+					throw new Error( 'Vänligen ange ett giltigt lösenord (4-20 icke-whitespace tecken).' );
 				} else if ( regPw !== regPwRepeat ) {
-					throw new Error( 'The password did not match the repeat.' );
+					throw new Error( 'De två angivna lösenorden matchar inte.' );
 				}
 
 				this.collection.create( {
-					username : regName,
-					password : regPw
+					 username : regName,
+					 password: regPw 
 				} );
 
 				console.log( "Successfully registered!" );
