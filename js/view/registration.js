@@ -5,8 +5,6 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 			el: $( '#app' ),
 
 			initialize: function() {
-				this.collection.fetch();
-
 				this.collection.bind( 'reset', this.render, this );
 				this.collection.bind( 'add', this.render, this );
 
@@ -47,8 +45,8 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 
 					var user = this.collection.create( {
 						 username: regName,
-						 password: regPw 
-					} );
+						 password: regPw
+					}, { error: function( model, response ) { console.log( response ); }, success: function( msg ) { console.log( "Logged in!!!" ); } } );
 
 					Backbone.history.navigate( 'Login', { trigger: true } ); 
 				} catch ( er ) {

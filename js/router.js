@@ -9,7 +9,10 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', 'auth', 'collecti
 
 			router: Backbone.Router.extend( {
 				initialize: function() {
-					this.userCollection = new UserCollection();
+					this.calculatorView = new CalculatorView();
+					this.registrationView = new RegistrationView( { collection: new UserCollection() } );
+					this.loginView = new LoginView( { collection: new UserCollection() } );
+					this.logoutView = new LogoutView();
 				},
 
 				routes: {
@@ -20,19 +23,19 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', 'auth', 'collecti
 				},
 
 				index: function() {
-					new CalculatorView();
+					this.calculatorView.render();
 				},
 
 				register: function() {
-					new RegistrationView( { collection: this.userCollection } );
+					this.registrationView.collection.fetch();
 				},
 
 				login: function() {
-					new LoginView( { collection: this.userCollection } );
+					this.loginView.collection.fetch();
 				},
 
 				logout: function() {
-					new LogoutView();
+					this.logoutView.logout();
 				}
 			} )
 		};

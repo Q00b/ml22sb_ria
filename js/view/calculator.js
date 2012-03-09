@@ -6,7 +6,6 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', '../auth'],
 
 			initialize: function() {
 				this.template = _.template( $( '#calculator-template' ).html() );
-				this.render();
 			},
 
 			render: function() {

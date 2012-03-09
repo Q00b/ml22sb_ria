@@ -5,8 +5,6 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', '../auth'],
 			el: $( '#app' ),
 
 			initialize: function() {
-				this.collection.fetch();
-
 				this.collection.bind( 'reset', this.render, this );
 				this.collection.bind( 'add', this.render, this );
 
