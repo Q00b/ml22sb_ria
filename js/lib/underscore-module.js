@@ -1,5 +1,4 @@
-define(
-	['order!lib/underscore'],
+define( ['order!lib/underscore'],
 
 	function() {
 		return _;

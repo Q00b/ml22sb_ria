@@ -1,11 +1,9 @@
-define( ['order!backbone', '../model/user'], function( Backbone, UserModel ) {
-	return Backbone.Collection.extend( {
-		model : UserModel,
+define( ['order!backbone', '../model/user'],
 
-		url : 'php/mongo-user.php',
-
-		initialize : function() {
-			this.fetch();
-		}
-	} );
-} );
+	function( Backbone, UserModel ) {
+		return Backbone.Collection.extend( {
+			model: UserModel,
+			url: 'php/mongo-user.php'
+		} );
+	}
+);

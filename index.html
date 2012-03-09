@@ -35,16 +35,44 @@
 				</fieldset>
 			</form>
 		</script>
-		<script type="text/template" id="logout-template">
+		<script type="text/template" id="create-food-template">
 			<form>
 				<fieldset>
-					<input type="submit" name="logout" id="logout" value="Logga ut" />
+					<label for="create-food-name">Livsmedel</label>
+				    <input type="text" name="create-food-name" id="create-food-name" />
+				    <label for="create-food-protein">Protein / 100g</label>
+				    <input type="text" name="create-food-protein" id="create-food-protein" />
+				    <label for="create-food-carbohydrates">Kolhydrater / 100g</label>
+				    <input type="text" name="create-food-carbohydrates" id="create-food-carbohydrates" />
+				    <label for="create-food-fat">Fett / 100g</label>
+				    <input type="text" name="create-food-fat" id="create-food-fat" />
+					<input type="submit" name="create-food" id="create-add" value="Spara livsmedel" />
 				</fieldset>
 			</form>
 		</script>
+		<script type="text/template" id="use-food-template">
+			<form>
+				<fieldset>
+					<label for="use-food-name">Livsmedel</label>
+				    <select name="use-food-name" id="use-food-name">
+				    	<option value=""></option>
+				    </select>
+					<input type="submit" name="use-food-add" id="use-food-add" value="Använd livsmedel" />
+					<input type="button" name="use-food-remove" id="use-food-remove" value="Ta bort" />
+				</fieldset>
+			</form>
+		</script>
+		<script type="text/template" id="calculator-template">
+			<% if ( loggedOut ) { %>
+				<p><a href="#login-link" id="login-link">Login</a> or <a href="#register-link" id="register-link">Register</a></p>
+			<% } else { %>
+				<p><a href="#logout-link" id="logout-link">Logout</a></p>
+				<p>Calculator</p>
+			<% } %>
+		</script>
 	</head>
 	<body>
-		<div id="registration"></div>
-		<div id="login"></div>
+		<div id="logout-box"></div>
+		<div id="app"></div>
 	</body>
 </html>

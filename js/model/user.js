@@ -1,12 +1,15 @@
-define( ['order!backbone'], function( Backbone ) {
-	return Backbone.Model.extend( {
-		idAttribute : '_id',
+define( ['order!backbone'],
 
-		url : 'php/mongo-user.php',
+	function( Backbone ) {
+		return Backbone.Model.extend( {
+			idAttribute: '_id',
 
-		defaults : {
-			username : null,
-			password : null
-		}
-	} );
-} );
+			url: 'php/mongo-user.php',
+
+			defaults: {
+				username: null,
+				password: null
+			}
+		} );
+	}
+);

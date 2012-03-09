@@ -1,28 +1,40 @@
-define( ['order!jQuery', 'order!underscore', 'order!backbone', 'auth', 'view/registration', 'view/login'], function( $, _, Backbone, Auth, RegistrationView, LoginView ) {
-	return {
-		run : function() {
-			new this.router();
-			Backbone.history.start();
-		},
+define( ['order!jQuery', 'order!underscore', 'order!backbone', 'auth', 'collection/users', 'view/registration', 'view/login', 'view/calculator', 'view/logout'],
 
-		router : Backbone.Router.extend( {
-			routes : {
-				'' : 'index',
-				'register' : 'register',
-				'login' : 'login'
+	function( $, _, Backbone, Auth, UserCollection, RegistrationView, LoginView, CalculatorView, LogoutView ) {
+		return {
+			run: function() {
+				new this.router();
+				Backbone.history.start();
 			},
 
-			index : function() {
-				console.log( "index" );
-			},
+			router: Backbone.Router.extend( {
+				initialize: function() {
+					this.userCollection = new UserCollection();
+				},
 
-			register : function() {
-				new RegistrationView();
-			},
+				routes: {
+					'': 'index',
+					'register': 'register',
+					'login': 'login',
+					'logout': 'logout'
+				},
 
-			login : function() {
-				new LoginView();
-			}
-		} )
+				index: function() {
+					new CalculatorView();
+				},
+
+				register: function() {
+					new RegistrationView( { collection: this.userCollection } );
+				},
+
+				login: function() {
+					new LoginView( { collection: this.userCollection } );
+				},
+
+				logout: function() {
+					new LogoutView();
+				}
+			} )
+		};
 	}
-} );
+);
