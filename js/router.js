@@ -1,6 +1,6 @@
-define( ['order!jQuery', 'order!underscore', 'order!backbone', 'auth', 'collection/users', 'view/registration', 'view/login', 'view/calculator', 'view/logout'],
+define( ['order!jQuery', 'order!underscore', 'order!backbone', 'auth', 'collection/users', 'view/registration', 'view/login', 'view/calculator', 'view/logout', 'view/menu'],
 
-	function( $, _, Backbone, Auth, UserCollection, RegistrationView, LoginView, CalculatorView, LogoutView ) {
+	function( $, _, Backbone, Auth, UserCollection, RegistrationView, LoginView, CalculatorView, LogoutView, MenuView ) {
 		return {
 			run: function() {
 				new this.router();
@@ -13,6 +13,7 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', 'auth', 'collecti
 					this.registrationView = new RegistrationView( { collection: new UserCollection() } );
 					this.loginView = new LoginView( { collection: new UserCollection() } );
 					this.logoutView = new LogoutView();
+					this.menuView = new MenuView();
 				},
 
 				routes: {
@@ -23,18 +24,22 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', 'auth', 'collecti
 				},
 
 				index: function() {
+					this.menuView.render();
 					this.calculatorView.render();
 				},
 
 				register: function() {
+					this.menuView.render();
 					this.registrationView.collection.fetch();
 				},
 
 				login: function() {
+					this.menuView.render();
 					this.loginView.collection.fetch();
 				},
 
 				logout: function() {
+					this.menuView.render();
 					this.logoutView.logout();
 				}
 			} )

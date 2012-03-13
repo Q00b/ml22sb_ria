@@ -13,15 +13,15 @@ switch ( $_SERVER['REQUEST_METHOD'] )
 		{
 			$user = json_decode( $user );
 
-			header( 'error', true, 500 );
+			
 			echo json_encode( array( 'msg' => 'mitt error' ) );
-/*			if ( !$db->RIA->users->findOne( array( 'username' => $user->username ) ) )
+			if ( !$db->RIA->users->findOne( array( 'username' => $user->username ) ) )
 			{
 				$db->RIA->users->insert( $user );
 			} else {
 				// User already exists.
-				// TODO: Skicka tillbaka error till Backbone..
-			}*/
+				header( 'error', true, 500 );
+			}
 		}
 
 		break;

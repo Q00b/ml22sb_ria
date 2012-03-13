@@ -2,7 +2,7 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', '../auth'],
 
 	function( $, _, Backbone, Auth ) {
 		return Backbone.View.extend( {
-			el: $( '#app' ),
+			el: $( '#content' ),
 
 			initialize: function() {
 				this.collection.bind( 'reset', this.render, this );

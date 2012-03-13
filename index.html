@@ -8,12 +8,9 @@
 		<script type="text/template" id="registration-template">
 			<form>
 				<fieldset>
-					<label for="registration-name">Användarnamn</label>
-					<input type="text" name="registration-name" id="registration-name" />
-					<label for="registration-pw">Lösenord</label>
-					<input type="password" name="registration-pw" id="registration-pw" />
-					<label for="registration-pwrepeat">Repetera lösenord</label>
-					<input type="password" name="registration-pwrepeat" id="registration-pwrepeat" />
+					<label>Användarnamn: <input type="text" name="registration-name" id="registration-name" /></label>
+					<label>Lösenord: <input type="password" name="registration-pw" id="registration-pw" /></label>
+					<label>Repetera lösenord: <input type="password" name="registration-pwrepeat" id="registration-pwrepeat" /></label>
 					<input type="submit" name="register" id="register" value="Skapa konto" />
 				</fieldset>
 			</form>
@@ -27,52 +24,85 @@
 		<script type="text/template" id="login-template">
 			<form>
 				<fieldset>
-					<label for="login-name">Användarnamn</label>
-					<input type="text" name="login-name" id="login-name" />
-					<label for="login-pw">Lösenord</label>
-					<input type="password" name="login-pw" id="login-pw" />
+					<label>Användarnamn: <input type="text" name="login-name" id="login-name" /></label>
+					<label>Lösenord: <input type="password" name="login-pw" id="login-pw" /></label>
 					<input type="submit" name="login" id="login" value="Logga in" />
-				</fieldset>
-			</form>
-		</script>
-		<script type="text/template" id="create-food-template">
-			<form>
-				<fieldset>
-					<label for="create-food-name">Livsmedel</label>
-				    <input type="text" name="create-food-name" id="create-food-name" />
-				    <label for="create-food-protein">Protein / 100g</label>
-				    <input type="text" name="create-food-protein" id="create-food-protein" />
-				    <label for="create-food-carbohydrates">Kolhydrater / 100g</label>
-				    <input type="text" name="create-food-carbohydrates" id="create-food-carbohydrates" />
-				    <label for="create-food-fat">Fett / 100g</label>
-				    <input type="text" name="create-food-fat" id="create-food-fat" />
-					<input type="submit" name="create-food" id="create-add" value="Spara livsmedel" />
-				</fieldset>
-			</form>
-		</script>
-		<script type="text/template" id="use-food-template">
-			<form>
-				<fieldset>
-					<label for="use-food-name">Livsmedel</label>
-				    <select name="use-food-name" id="use-food-name">
-				    	<option value=""></option>
-				    </select>
-					<input type="submit" name="use-food-add" id="use-food-add" value="Använd livsmedel" />
-					<input type="button" name="use-food-remove" id="use-food-remove" value="Ta bort" />
 				</fieldset>
 			</form>
 		</script>
 		<script type="text/template" id="calculator-template">
 			<% if ( loggedOut ) { %>
-				<p><a href="#login-link" id="login-link">Login</a> or <a href="#register-link" id="register-link">Register</a></p>
+				<p>Please log in or register.</p>
 			<% } else { %>
-				<p><a href="#logout-link" id="logout-link">Logout</a></p>
-				<p>Calculator</p>
+				<form>
+					<fieldset>
+						<label>Livsmedel: <input type="text" name="create-food-name" id="create-food-name" /></label>
+					    <label>Protein: <input type="text" name="create-food-protein" id="create-food-protein" /></label>
+					    <label>Kolhydrater: <input type="text" name="create-food-carbohydrates" id="create-food-carbohydrates" /></label>
+					    <label>Fett: <input type="text" name="create-food-fat" id="create-food-fat" /></label>
+						<input type="submit" name="create-food" id="create-food" value="Spara livsmedel" />
+					</fieldset>
+				</form>
+				<form>
+					<fieldset>
+						<label>Livsmedel: <select name="use-food-name" id="use-food-name">
+							<option value="0">Placeholder</option>
+						</select></label>
+						<input type="submit" name="use-food" id="use-food" value="Använd" />
+						<input type="button" name="use-food-delete" id="use-food-delete" value="Kasta" />
+					</fieldset>
+				</form>
+				<form>
+					<fieldset>
+						<table>
+							<tr>
+								<th>Vikt</th>
+								<th>Livsmedel</th>
+								<th>Protein</th>
+								<th>Kolhydrater</th>
+								<th>Fett</th>
+								<th>Ta bort</th>
+							</tr>
+							<tr>
+								<td><input type="text" name="calculator-item-0-weight" id="calculator-item-0-weight" /></td>
+								<td>Livsmedelsnamn</td>
+								<td>P</td>
+								<td>K</td>
+								<td>F</td>
+								<td><input type="button" name="calculator-item-0-remove" id="calculator-item-0-remove" value="Ta bort" /></td>
+							</tr>
+							<tr>
+								<td><input type="text" name="calculator-item-1-weight" id="calculator-item-1-weight" /></td>
+								<td>Livsmedelsnamn</td>
+								<td>P</td>
+								<td>K</td>
+								<td>F</td>
+								<td><input type="button" name="calculator-item-1-remove" id="calculator-item-1-remove" value="Ta bort" /></td>
+							</tr>
+							<tr>
+								<td><input type="text" name="calculator-item-2-weight" id="calculator-item-2-weight" /></td>
+								<td>Livsmedelsnamn</td>
+								<td>P</td>
+								<td>K</td>
+								<td>F</td>
+								<td><input type="button" name="calculator-item-2-remove" id="calculator-item-2-remove" value="Ta bort" /></td>
+							</tr>
+						</table>
+					</fieldset>
+				</form>
+			<% } %>
+		</script>
+		<script type="text/template" id="menu-template">
+			<a href="#menu-home" id="menu-home">Home</a>
+			<% if ( loggedOut ) { %>
+				<a href="#menu-login" id="menu-login">Login</a> <a href="#menu-register" id="menu-register">Register</a>
+			<% } else { %>
+				<a href="#menu-logout" id="menu-logout">Logout</a>
 			<% } %>
 		</script>
 	</head>
 	<body>
-		<div id="logout-box"></div>
-		<div id="app"></div>
+		<div id="menu"></div>
+		<div id="content"></div>
 	</body>
 </html>

@@ -2,7 +2,7 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 
 	function( $, _, Backbone ) {
 		return Backbone.View.extend( {
-			el: $( '#app' ),
+			el: $( '#content' ),
 
 			initialize: function() {
 				this.collection.bind( 'reset', this.render, this );
@@ -46,9 +46,13 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 					var user = this.collection.create( {
 						 username: regName,
 						 password: regPw
-					}, { error: function( model, response ) { console.log( response ); }, success: function( msg ) { console.log( "Logged in!!!" ); } } );
+					}, {
+						error: function( model, response ) {
+							console.log( response );
+						}
+					} );
 
-					Backbone.history.navigate( 'Login', { trigger: true } ); 
+					Backbone.history.navigate( 'login', { trigger: true } ); 
 				} catch ( er ) {
 					console.log( "Could not register: " + er.message );
 				}
