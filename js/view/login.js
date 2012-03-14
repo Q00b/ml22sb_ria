@@ -1,18 +1,14 @@
-define( ['order!jQuery', 'order!underscore', 'order!backbone', '../auth'],
+define( ['order!jQuery', 'order!underscore', 'order!backbone', 'order!../auth'],
 
 	function( $, _, Backbone, Auth ) {
 		return Backbone.View.extend( {
 			el: $( '#content-container' ),
 
 			initialize: function() {
-				// this.collection.bind( 'reset', this.render, this );
-				// this.collection.bind( 'add', this.render, this );
-
 				this.template = _.template( $( '#login-template' ).html() );
 			},
 
 			render: function() {
-				console.log( "rendering login" );
 				$( this.el ).html( this.template() );
 			},
 

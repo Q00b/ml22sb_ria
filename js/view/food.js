@@ -1,6 +1,6 @@
-define( ['order!jQuery', 'order!underscore', 'order!backbone', '../auth'],
+define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 
-	function( $, _, Backbone, Auth ) {
+	function( $, _, Backbone ) {
 		return Backbone.View.extend( {
 			el: $( '#food-container' ),
 

@@ -1,4 +1,4 @@
-define( ['order!jQuery', 'order!underscore', 'order!backbone', '../auth'],
+define( ['order!jQuery', 'order!underscore', 'order!backbone', 'order!../auth'],
 
 	function( $, _, Backbone, Auth ) {
 		return Backbone.View.extend( {
@@ -13,13 +13,13 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', '../auth'],
 			},
 
 			events: {
-				'click #menu-home': 'home',
+				'click #menu-calculator': 'calculator',
 				'click #menu-register': 'register',
 				'click #menu-login': 'login',
 				'click #menu-logout': 'logout'
 			},
 
-			home: function( e ) {
+			calculator: function( e ) {
 				e.preventDefault();
 				Backbone.history.navigate( '', { trigger: true } );
 			},

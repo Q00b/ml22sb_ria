@@ -5,8 +5,9 @@
 		<title>Beräkna näringsvärden</title>
 		<link rel="stylesheet" href="css/core.css" type="text/css" />
 		<script type="text/javascript" src="js/lib/require.js" data-main="js/main"></script>
+
 		<script type="text/template" id="menu-template">
-			<a href="#menu-home" id="menu-home">Home</a>
+			<a href="#menu-calculator" id="menu-calculator">Calculator</a>
 			<% if ( loggedOut ) { %>
 				<a href="#menu-login" id="menu-login">Login</a> <a href="#menu-register" id="menu-register">Register</a>
 			<% } else { %>
@@ -32,64 +33,58 @@
 				</fieldset>
 			</form>
 
-			<ul>
-			<% _.each( users, function( users ) { %>
-				<li><%= users.attributes.username %></li>
-			<% } ); %>
-			</ul>
+			<% _.each( users, function( user ) { %>
+				<li><%=user.attributes.username%></li>
+			<%} );%>
 		</script>
 		<script type="text/template" id="calculator-template">
 			<% if ( loggedOut ) { %>
-				<p>Please log in or register.</p>
+				<p>You must be registered and logged in to use the calculator.</p>
 			<% } else { %>
 				<div id="food-container"></div>
 				<div id="calculator-items-container"></div>
 			<% } %>
 		</script>
 		<script type="text/template" id="calculator-items-template">
-			<% if ( loggedOut ) { %>
-				<p>Please log in or register.</p>
-			<% } else { %>
-				<form>
-					<fieldset>
-						<table>
-							<tr>
-								<th>Vikt</th>
-								<th>Livsmedel</th>
-								<th>Protein</th>
-								<th>Kolhydrater</th>
-								<th>Fett</th>
-								<th>Ta bort</th>
-							</tr>
-							<tr>
-								<td><input type="text" name="calculator-item-0-weight" id="calculator-item-0-weight" /></td>
-								<td>Livsmedelsnamn</td>
-								<td>P</td>
-								<td>K</td>
-								<td>F</td>
-								<td><input type="checkbox" name="calculator-item-0-remove" id="calculator-item-0-remove" value="remove" /></td>
-							</tr>
-							<tr>
-								<td><input type="text" name="calculator-item-1-weight" id="calculator-item-1-weight" /></td>
-								<td>Livsmedelsnamn</td>
-								<td>P</td>
-								<td>K</td>
-								<td>F</td>
-								<td><input type="checkbox" name="calculator-item-1-remove" id="calculator-item-1-remove" value="remove" /></td>
-							</tr>
-							<tr>
-								<td><input type="text" name="calculator-item-2-weight" id="calculator-item-2-weight" /></td>
-								<td>Livsmedelsnamn</td>
-								<td>P</td>
-								<td>K</td>
-								<td>F</td>
-								<td><input type="checkbox" name="calculator-item-2-remove" id="calculator-item-2-remove" value="remove" /></td>
-							</tr>
-						</table>
-						<input type="submit" name="calculator-update" id="calculator-update" value="Genomför ändringar" />
-					</fieldset>
-				</form>
-			<% } %>
+			<form>
+				<fieldset>
+					<table>
+						<tr>
+							<th>Vikt</th>
+							<th>Livsmedel</th>
+							<th>Protein</th>
+							<th>Kolhydrater</th>
+							<th>Fett</th>
+							<th>Ta bort</th>
+						</tr>
+						<tr>
+							<td><input type="text" name="calculator-item-0-weight" id="calculator-item-0-weight" /></td>
+							<td>Livsmedelsnamn</td>
+							<td>P</td>
+							<td>K</td>
+							<td>F</td>
+							<td><input type="checkbox" name="calculator-item-0-remove" id="calculator-item-0-remove" value="remove" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" name="calculator-item-1-weight" id="calculator-item-1-weight" /></td>
+							<td>Livsmedelsnamn</td>
+							<td>P</td>
+							<td>K</td>
+							<td>F</td>
+							<td><input type="checkbox" name="calculator-item-1-remove" id="calculator-item-1-remove" value="remove" /></td>
+						</tr>
+						<tr>
+							<td><input type="text" name="calculator-item-2-weight" id="calculator-item-2-weight" /></td>
+							<td>Livsmedelsnamn</td>
+							<td>P</td>
+							<td>K</td>
+							<td>F</td>
+							<td><input type="checkbox" name="calculator-item-2-remove" id="calculator-item-2-remove" value="remove" /></td>
+						</tr>
+					</table>
+					<input type="submit" name="calculator-update" id="calculator-update" value="Genomför ändringar" />
+				</fieldset>
+			</form>
 		</script>
 		<script type="text/template" id="food-template">
 			<form>
