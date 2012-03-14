@@ -3,9 +3,9 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 	function( $, _, Backbone ) {
 		return Backbone.View.extend( {
 			el: $( '#food-container' ),
+			template: _.template( $( '#food-template' ).html() ),
 
 			initialize: function() {
-				this.template = _.template( $( '#food-template' ).html() );
 			},
 
 			render: function() {
@@ -21,14 +21,17 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 
 			createFood: function( e ) {
 				e.preventDefault();
+				console.log( "create food" );
 			},
 
 			useFood: function( e ) {
 				e.preventDefault();
+				console.log( "use food" );
 			},
 
 			deleteFood: function( e ) {
 				e.preventDefault();
+				console.log( "delete food" );
 			}
 		} );
 	}

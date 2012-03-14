@@ -3,9 +3,9 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', 'order!../auth'],
 	function( $, _, Backbone, Auth ) {
 		return Backbone.View.extend( {
 			el: $( '#content-container' ),
+			template: _.template( $( '#login-template' ).html() ),
 
 			initialize: function() {
-				this.template = _.template( $( '#login-template' ).html() );
 			},
 
 			render: function() {

@@ -6,12 +6,10 @@ define( ['order!jQuery',
 		 'order!view/registration',
 		 'order!view/login',
 		 'order!view/calculator',
-		 'order!view/calculatoritems',
-		 'order!view/food',
 		 'order!view/logout',
 		 'order!view/menu'],
 
-	function( $, _, Backbone, Auth, UserCollection, RegistrationView, LoginView, CalculatorView, CalculatorItemsView, FoodView, LogoutView, MenuView ) {
+	function( $, _, Backbone, Auth, UserCollection, RegistrationView, LoginView, CalculatorView, LogoutView, MenuView ) {
 		return {
 			run: function() {
 				new this.router();
@@ -23,8 +21,6 @@ define( ['order!jQuery',
 					this.userCollection = new UserCollection();
 
 					this.calculatorView = new CalculatorView();
-					this.foodView = new FoodView();
-					this.calculatorItemsView = new CalculatorItemsView();
 					this.registrationView = new RegistrationView( { collection: this.userCollection } );
 					this.loginView = new LoginView( { collection: this.userCollection } );
 					this.logoutView = new LogoutView();
@@ -41,8 +37,6 @@ define( ['order!jQuery',
 				index: function() {
 						this.menuView.render();
 						this.calculatorView.render();
-						this.foodView.render();
-						this.calculatorItemsView.render();
 				},
 
 				register: function() {

@@ -45,6 +45,26 @@
 				<div id="calculator-items-container"></div>
 			<% } %>
 		</script>
+		<script type="text/template" id="food-template">
+			<form>
+				<fieldset>
+					<label>Livsmedel: <input type="text" name="create-food-name" id="create-food-name" /></label>
+				    <label>Protein: <input type="text" name="create-food-protein" id="create-food-protein" /></label>
+				    <label>Kolhydrater: <input type="text" name="create-food-carbohydrates" id="create-food-carbohydrates" /></label>
+				    <label>Fett: <input type="text" name="create-food-fat" id="create-food-fat" /></label>
+					<input type="submit" name="create-food" id="create-food" value="Spara livsmedel" />
+				</fieldset>
+			</form>
+			<form>
+				<fieldset>
+					<label>Livsmedel: <select name="use-food-name" id="use-food-name">
+						<option value="0">Placeholder</option>
+					</select></label>
+					<input type="submit" name="use-food" id="use-food" value="Använd" />
+					<input type="button" name="use-food-delete" id="use-food-delete" value="Kasta" />
+				</fieldset>
+			</form>
+		</script>
 		<script type="text/template" id="calculator-items-template">
 			<form>
 				<fieldset>
@@ -83,26 +103,6 @@
 						</tr>
 					</table>
 					<input type="submit" name="calculator-update" id="calculator-update" value="Genomför ändringar" />
-				</fieldset>
-			</form>
-		</script>
-		<script type="text/template" id="food-template">
-			<form>
-				<fieldset>
-					<label>Livsmedel: <input type="text" name="create-food-name" id="create-food-name" /></label>
-				    <label>Protein: <input type="text" name="create-food-protein" id="create-food-protein" /></label>
-				    <label>Kolhydrater: <input type="text" name="create-food-carbohydrates" id="create-food-carbohydrates" /></label>
-				    <label>Fett: <input type="text" name="create-food-fat" id="create-food-fat" /></label>
-					<input type="submit" name="create-food" id="create-food" value="Spara livsmedel" />
-				</fieldset>
-			</form>
-			<form>
-				<fieldset>
-					<label>Livsmedel: <select name="use-food-name" id="use-food-name">
-						<option value="0">Placeholder</option>
-					</select></label>
-					<input type="submit" name="use-food" id="use-food" value="Använd" />
-					<input type="button" name="use-food-delete" id="use-food-delete" value="Kasta" />
 				</fieldset>
 			</form>
 		</script>
