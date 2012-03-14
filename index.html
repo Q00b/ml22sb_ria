@@ -5,6 +5,23 @@
 		<title>Beräkna näringsvärden</title>
 		<link rel="stylesheet" href="css/core.css" type="text/css" />
 		<script type="text/javascript" src="js/lib/require.js" data-main="js/main"></script>
+		<script type="text/template" id="menu-template">
+			<a href="#menu-home" id="menu-home">Home</a>
+			<% if ( loggedOut ) { %>
+				<a href="#menu-login" id="menu-login">Login</a> <a href="#menu-register" id="menu-register">Register</a>
+			<% } else { %>
+				<a href="#menu-logout" id="menu-logout">Logout</a>
+			<% } %>
+		</script>
+		<script type="text/template" id="login-template">
+			<form>
+				<fieldset>
+					<label>Användarnamn: <input type="text" name="login-name" id="login-name" /></label>
+					<label>Lösenord: <input type="password" name="login-pw" id="login-pw" /></label>
+					<input type="submit" name="login" id="login" value="Logga in" />
+				</fieldset>
+			</form>
+		</script>
 		<script type="text/template" id="registration-template">
 			<form>
 				<fieldset>
@@ -21,37 +38,18 @@
 			<% } ); %>
 			</ul>
 		</script>
-		<script type="text/template" id="login-template">
-			<form>
-				<fieldset>
-					<label>Användarnamn: <input type="text" name="login-name" id="login-name" /></label>
-					<label>Lösenord: <input type="password" name="login-pw" id="login-pw" /></label>
-					<input type="submit" name="login" id="login" value="Logga in" />
-				</fieldset>
-			</form>
-		</script>
 		<script type="text/template" id="calculator-template">
 			<% if ( loggedOut ) { %>
 				<p>Please log in or register.</p>
 			<% } else { %>
-				<form>
-					<fieldset>
-						<label>Livsmedel: <input type="text" name="create-food-name" id="create-food-name" /></label>
-					    <label>Protein: <input type="text" name="create-food-protein" id="create-food-protein" /></label>
-					    <label>Kolhydrater: <input type="text" name="create-food-carbohydrates" id="create-food-carbohydrates" /></label>
-					    <label>Fett: <input type="text" name="create-food-fat" id="create-food-fat" /></label>
-						<input type="submit" name="create-food" id="create-food" value="Spara livsmedel" />
-					</fieldset>
-				</form>
-				<form>
-					<fieldset>
-						<label>Livsmedel: <select name="use-food-name" id="use-food-name">
-							<option value="0">Placeholder</option>
-						</select></label>
-						<input type="submit" name="use-food" id="use-food" value="Använd" />
-						<input type="button" name="use-food-delete" id="use-food-delete" value="Kasta" />
-					</fieldset>
-				</form>
+				<div id="food-container"></div>
+				<div id="calculator-items-container"></div>
+			<% } %>
+		</script>
+		<script type="text/template" id="calculator-items-template">
+			<% if ( loggedOut ) { %>
+				<p>Please log in or register.</p>
+			<% } else { %>
 				<form>
 					<fieldset>
 						<table>
@@ -69,7 +67,7 @@
 								<td>P</td>
 								<td>K</td>
 								<td>F</td>
-								<td><input type="button" name="calculator-item-0-remove" id="calculator-item-0-remove" value="Ta bort" /></td>
+								<td><input type="checkbox" name="calculator-item-0-remove" id="calculator-item-0-remove" value="remove" /></td>
 							</tr>
 							<tr>
 								<td><input type="text" name="calculator-item-1-weight" id="calculator-item-1-weight" /></td>
@@ -77,7 +75,7 @@
 								<td>P</td>
 								<td>K</td>
 								<td>F</td>
-								<td><input type="button" name="calculator-item-1-remove" id="calculator-item-1-remove" value="Ta bort" /></td>
+								<td><input type="checkbox" name="calculator-item-1-remove" id="calculator-item-1-remove" value="remove" /></td>
 							</tr>
 							<tr>
 								<td><input type="text" name="calculator-item-2-weight" id="calculator-item-2-weight" /></td>
@@ -85,24 +83,37 @@
 								<td>P</td>
 								<td>K</td>
 								<td>F</td>
-								<td><input type="button" name="calculator-item-2-remove" id="calculator-item-2-remove" value="Ta bort" /></td>
+								<td><input type="checkbox" name="calculator-item-2-remove" id="calculator-item-2-remove" value="remove" /></td>
 							</tr>
 						</table>
+						<input type="submit" name="calculator-update" id="calculator-update" value="Genomför ändringar" />
 					</fieldset>
 				</form>
 			<% } %>
 		</script>
-		<script type="text/template" id="menu-template">
-			<a href="#menu-home" id="menu-home">Home</a>
-			<% if ( loggedOut ) { %>
-				<a href="#menu-login" id="menu-login">Login</a> <a href="#menu-register" id="menu-register">Register</a>
-			<% } else { %>
-				<a href="#menu-logout" id="menu-logout">Logout</a>
-			<% } %>
+		<script type="text/template" id="food-template">
+			<form>
+				<fieldset>
+					<label>Livsmedel: <input type="text" name="create-food-name" id="create-food-name" /></label>
+				    <label>Protein: <input type="text" name="create-food-protein" id="create-food-protein" /></label>
+				    <label>Kolhydrater: <input type="text" name="create-food-carbohydrates" id="create-food-carbohydrates" /></label>
+				    <label>Fett: <input type="text" name="create-food-fat" id="create-food-fat" /></label>
+					<input type="submit" name="create-food" id="create-food" value="Spara livsmedel" />
+				</fieldset>
+			</form>
+			<form>
+				<fieldset>
+					<label>Livsmedel: <select name="use-food-name" id="use-food-name">
+						<option value="0">Placeholder</option>
+					</select></label>
+					<input type="submit" name="use-food" id="use-food" value="Använd" />
+					<input type="button" name="use-food-delete" id="use-food-delete" value="Kasta" />
+				</fieldset>
+			</form>
 		</script>
 	</head>
 	<body>
-		<div id="menu"></div>
-		<div id="content"></div>
+		<div id="menu-container"></div>
+		<div id="content-container"></div>
 	</body>
 </html>

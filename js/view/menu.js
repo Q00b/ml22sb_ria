@@ -2,7 +2,7 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', '../auth'],
 
 	function( $, _, Backbone, Auth ) {
 		return Backbone.View.extend( {
-			el: $( '#menu' ),
+			el: $( '#menu-container' ),
 
 			initialize: function() {
 				this.template = _.template( $( '#menu-template' ).html() );

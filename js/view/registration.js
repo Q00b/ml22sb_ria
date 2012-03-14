@@ -2,11 +2,11 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 
 	function( $, _, Backbone ) {
 		return Backbone.View.extend( {
-			el: $( '#content' ),
+			el: $( '#content-container' ),
 
 			initialize: function() {
-				this.collection.bind( 'reset', this.render, this );
-				this.collection.bind( 'add', this.render, this );
+				// this.collection.bind( 'reset', this.render, this );
+				// this.collection.bind( 'add', this.render, this );
 
 				this.template = _.template( $( '#registration-template' ).html() );
 			},
