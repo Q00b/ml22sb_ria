@@ -19,13 +19,27 @@ define( ['order!jQuery',
 			},
 
 			render: function() {
-				$( this.el ).html( this.template( { calculatorItems: this.collection.models, calc: Calc } ) );
+				$( this.el ).html( this.template( { calculatorItems: this.collection.models, calc: Calc, totals: this.totals() } ) );
 				return this;
 			},
 
-			updateCalculatorItems: function( e ) {
-				e.preventDefault();
-				console.log( "update calculator items." );
+			totals: function() {
+				var protein = 0,
+					carbohydrates = 0,
+					fat = 0,
+					energy = 0;
+
+				_.each( this.collection.models, function( food ) {
+					var item = food.attributes;
+					var food = food.attributes.food.attributes;
+
+					protein += Calc.nutrientWeight( item.weight, food.protein );
+					carbohydrates += Calc.nutrientWeight( item.weight, food.carbohydrates );
+					fat += Calc.nutrientWeight( item.weight, food.fat );
+					energy += Calc.energy( item.weight, food.protein, food.carbohydrates, food.fat );
+				} );
+
+				return { protein: protein, carbohydrates: carbohydrates, fat: fat, energy: energy };
 			},
 
 			events: {
