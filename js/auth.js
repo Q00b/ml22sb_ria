@@ -3,15 +3,15 @@ define( [],
 	function() {
 		return {
 			isLoggedOut: function() {
-				return ( !document.cookie || document.cookie == 'user=' );
+				return ( !document.cookie || document.cookie == 'userid=' );
 			},
 
 			login: function( userId ) {
-				document.cookie = 'user=' + userId;
+				document.cookie = 'userid=' + userId;
 			},
 
 			logout: function() {
-				document.cookie = 'user=';
+				document.cookie = 'userid=';
 			},
 
 			getUserId: function() {

@@ -9,7 +9,7 @@ define( ['order!backbone', 'order!../model/user'],
 			initialize: function() {
 				this.onResetCallbacks = [];
 				this.on( 'reset', this.collectionReset, this );
-				this.on( 'add', this.fetch, this );
+
 				this.fetch();
 			},
 

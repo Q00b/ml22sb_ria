@@ -6,6 +6,7 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 			template: _.template( $( '#registration-template' ).html() ),
 
 			initialize: function() {
+				this.collection.on( 'add', this.render, this );
 			},
 
 			render: function() {
@@ -17,12 +18,16 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 			},
 
 			register: function( e ) {
+				var regName = '',
+					regPw = '',
+					regPwRepeat = '';
+
 				e.preventDefault();
 
 				try {
-					var regName = $( '#registration-name' ).val();
-					var regPw = $( '#registration-pw' ).val();
-					var regPwRepeat = $( '#registration-pwrepeat' ).val();
+					regName = $( '#registration-name' ).val();
+					regPw = $( '#registration-pw' ).val();
+					regPwRepeat = $( '#registration-pwrepeat' ).val();
 
 					if ( _.find( this.collection.models, function( cmp_user ) {
 						return ( cmp_user.attributes.username == regName );
@@ -40,12 +45,12 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 						throw new Error( 'De två angivna lösenorden matchar inte.' );
 					}
 
-					var user = this.collection.create( {
+					this.collection.create( {
 						 username: regName,
 						 password: regPw
 					}, {
 						error: function( model, response ) {
-							console.log( response );
+							throw new Error( response );
 						}
 					} );
 

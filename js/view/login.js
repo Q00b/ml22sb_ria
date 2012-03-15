@@ -17,11 +17,15 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', 'order!../auth'],
 			},
 
 			login: function( e ) {
+				var loginName = '',
+					loginPw = '',
+					user = {};
+
 				e.preventDefault();
 
 				try {
-					var loginName = $( '#login-name' ).val();
-					var loginPw = $( '#login-pw' ).val();
+					loginName = $( '#login-name' ).val();
+					loginPw = $( '#login-pw' ).val();
 
 					if ( !loginName || !loginName.match( /^[A-z0-9_]{4,20}$/i ) ) {
 						throw new Error( 'Felaktigt användarnamn.' );
@@ -31,7 +35,7 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', 'order!../auth'],
 						throw new Error( 'Felaktigt lösenord.' );
 					}
 
-					var user = _.find( this.collection.models, function( cmp_user ) {
+					user = _.find( this.collection.models, function( cmp_user ) {
 						if ( cmp_user.attributes.username == loginName ) {
 							return cmp_user;
 						}
@@ -42,8 +46,6 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone', 'order!../auth'],
 					}
 
 					Auth.login( user.id );
-
-					console.log( "Successfully logged in!" );
 
 					Backbone.history.navigate( '', { trigger: true } );
 				} catch ( er ) {

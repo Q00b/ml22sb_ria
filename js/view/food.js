@@ -2,15 +2,16 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 
 	function( $, _, Backbone ) {
 		return Backbone.View.extend( {
-			el: $( '#food-container' ),
+			tagName: 'div',
+			id: 'food-container',
 			template: _.template( $( '#food-template' ).html() ),
 
 			initialize: function() {
 			},
 
 			render: function() {
-				this.el = $( '#food-container' );
 				$( this.el ).html( this.template() );
+				return this;
 			},
 
 			events: {

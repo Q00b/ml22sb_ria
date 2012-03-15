@@ -21,7 +21,7 @@ define( ['order!jQuery',
 					this.userCollection = new UserCollection();
 
 					this.calculatorView = new CalculatorView();
-					this.registrationView = new RegistrationView( { collection: this.userCollection } );
+					this.registrationView = new RegistrationView( { collection: this.userCollection  } );
 					this.loginView = new LoginView( { collection: this.userCollection } );
 					this.logoutView = new LogoutView();
 					this.menuView = new MenuView();
@@ -43,7 +43,7 @@ define( ['order!jQuery',
 					var that = this;
 
 					this.menuView.render();
-					this.userCollection.fetch();
+
 					this.userCollection.onReset( function( collection ) {
 						that.registrationView.render();
 					} );
@@ -53,10 +53,9 @@ define( ['order!jQuery',
 					var that = this;
 
 					this.menuView.render();
-					this.userCollection.fetch();
+
 					this.userCollection.onReset( function( collection ) {
 						that.loginView.render();
-						console.log( that.loginView.collection );
 					} );
 				},
 
