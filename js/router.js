@@ -20,7 +20,7 @@ define( ['order!jQuery',
 				initialize: function() {
 					this.userCollection = new UserCollection();
 
-					this.calculatorView = new CalculatorView();
+					this.calculatorView = new CalculatorView( { userCollection: this.userCollection } );
 					this.registrationView = new RegistrationView( { collection: this.userCollection  } );
 					this.loginView = new LoginView( { collection: this.userCollection } );
 					this.logoutView = new LogoutView();

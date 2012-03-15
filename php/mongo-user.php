@@ -13,14 +13,11 @@ switch ( $_SERVER['REQUEST_METHOD'] )
 		{
 			$user = json_decode( $user );
 
-			
-			echo json_encode( array( 'msg' => 'mitt error' ) );
 			if ( !$db->RIA->users->findOne( array( 'username' => $user->username ) ) )
 			{
 				$db->RIA->users->insert( $user );
 			} else {
-				// User already exists.
-				header( 'error', true, 500 );
+				header( 'User already exists', true, 500 );
 			}
 		}
 

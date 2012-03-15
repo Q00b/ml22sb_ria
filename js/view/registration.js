@@ -1,4 +1,6 @@
-define( ['order!jQuery', 'order!underscore', 'order!backbone'],
+define( ['order!jQuery',
+		 'order!underscore',
+		 'order!backbone'],
 
 	function( $, _, Backbone ) {
 		return Backbone.View.extend( {

@@ -1,4 +1,5 @@
-define( ['order!backbone', 'order!../model/user'],
+define( ['order!backbone',
+		 'order!../model/user'],
 
 	function( Backbone, UserModel ) {
 		return Backbone.Collection.extend( {

@@ -10,7 +10,8 @@ define( ['order!backbone'],
 				name: null,
 				protein: null,
 				carbohydrates: null,
-				fat: null
+				fat: null,
+				user: null
 			}
 		} );
 	}

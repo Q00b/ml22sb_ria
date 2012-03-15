@@ -9,35 +9,37 @@ switch ( $_SERVER['REQUEST_METHOD'] )
 {
 	// Add new user.
 	case 'POST' :
-/*		if ( $user = file_get_contents( 'php://input' ) )
+		if ( $food = file_get_contents( 'php://input' ) )
 		{
-			$user = json_decode( $user );
+			$food = json_decode( $food );
 
-			if ( !$db->RIA->users->findOne( array( 'username' => $user->username ) ) )
+			if ( !$db->RIA->food->findOne( array( 'name' => $food->name, 'user' => $food->user ) ) )
 			{
-				$db->RIA->users->insert( $user );
+				$db->RIA->food->insert( $food );
 			} else {
-				// User already exists.
-				// TODO: Skicka tillbaka error till Backbone..
+				header( 'Food name already exists', true, 500 );
 			}
-		}*/
+		}
 
 		break;
 
 	// Get all users.
 	case 'GET' :
-/*		$cursor = $db->RIA->users->find();
+		$cursor = $db->RIA->food->find();
 
-		$users = array();
+		$foods = array();
 
-		foreach ( $cursor as $user )
+		foreach ( $cursor as $food )
 		{
-			$users[] = array(	'_id' => $user['_id']->{'$id'},
-								'username' => $user['username'],
-								'password' => $user['password']  );
+			$foods[] = array(	'_id' => $food['_id']->{'$id'},
+								'name' => $food['name'],
+								'protein' => $food['protein'],
+								'carbohydrates' => $food['protein'],
+								'fat' => $food['protein'],
+								'user' => $food['user'] );
 		}
 
-		echo json_encode( $users );*/
+		echo json_encode( $foods );
 		break;
 
 	case 'PUT' :

@@ -35,7 +35,7 @@
 
 			<% _.each( users, function( user ) { %>
 				<li><%=user.attributes.username%></li>
-			<%} );%>
+			<%} ); %>
 		</script>
 		<script type="text/template" id="calculator-template">
 			<% if ( loggedOut ) { %>
@@ -55,7 +55,9 @@
 			<form>
 				<fieldset>
 					<label>Livsmedel: <select name="use-food-name" id="use-food-name">
-						<option value="0">Placeholder</option>
+						<% _.each( foods, function( food ) { %>
+						<option value="<%=food.attributes.id%>"><%=food.attributes.name%></option>
+						<% } ); %>
 					</select></label>
 					<input type="submit" name="use-food" id="use-food" value="Använd" />
 					<input type="button" name="use-food-delete" id="use-food-delete" value="Kasta" />
@@ -74,30 +76,16 @@
 							<th>Fett</th>
 							<th>Ta bort</th>
 						</tr>
-						<tr>
-							<td><input type="text" name="calculator-item-0-weight" id="calculator-item-0-weight" /></td>
-							<td>Livsmedelsnamn</td>
-							<td>P</td>
-							<td>K</td>
-							<td>F</td>
-							<td><input type="checkbox" name="calculator-item-0-remove" id="calculator-item-0-remove" value="remove" /></td>
-						</tr>
-						<tr>
-							<td><input type="text" name="calculator-item-1-weight" id="calculator-item-1-weight" /></td>
-							<td>Livsmedelsnamn</td>
-							<td>P</td>
-							<td>K</td>
-							<td>F</td>
-							<td><input type="checkbox" name="calculator-item-1-remove" id="calculator-item-1-remove" value="remove" /></td>
-						</tr>
-						<tr>
-							<td><input type="text" name="calculator-item-2-weight" id="calculator-item-2-weight" /></td>
-							<td>Livsmedelsnamn</td>
-							<td>P</td>
-							<td>K</td>
-							<td>F</td>
-							<td><input type="checkbox" name="calculator-item-2-remove" id="calculator-item-2-remove" value="remove" /></td>
-						</tr>
+						<% _.each( calculatorItems, function( calculatorItem ) { %>
+							<tr>
+								<td><input type="text" name="calculator-item-0-weight" id="calculator-item-0-weight" /></td>
+								<td>Livsmedelsnamn</td>
+								<td>P</td>
+								<td>K</td>
+								<td>F</td>
+								<td><input type="checkbox" name="calculator-item-0-remove" id="calculator-item-0-remove" value="remove" /></td>
+							</tr>
+						<% } ); %>
 					</table>
 					<input type="submit" name="calculator-update" id="calculator-update" value="Genomför ändringar" />
 				</fieldset>

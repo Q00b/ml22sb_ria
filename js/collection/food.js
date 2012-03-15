@@ -1,9 +1,15 @@
-define( ['order!backbone', 'order!../auth', 'order!../model/food'],
+define( ['order!backbone',
+		 'order!../model/food'],
 
-	function( Backbone, Auth, FoodModel ) {
+	function( Backbone, FoodModel ) {
 		return Backbone.Collection.extend( {
-			model : FoodModel,
-			url : 'php/mongo-user.php?userid=' + Auth.getUserId()
+			model: FoodModel,
+
+			url: 'php/mongo-food.php',
+
+			initialize: function() {
+				this.fetch();
+			}
 		} );
 	}
 );

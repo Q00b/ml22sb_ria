@@ -1,4 +1,6 @@
-define( ['order!jQuery', 'order!underscore', 'order!backbone'],
+define( ['order!jQuery',
+		 'order!underscore',
+		 'order!backbone'],
 
 	function( $, _, Backbone ) {
 		return Backbone.View.extend( {
@@ -6,11 +8,13 @@ define( ['order!jQuery', 'order!underscore', 'order!backbone'],
 			id: 'calculator-items-container',
 			template: _.template( $( '#calculator-items-template' ).html() ),
 
-			initialize: function() {
+			initialize: function( options ) {
+				this.userCollection = options.userCollection;
+				this.foodCollection = options.foodCollection;
 			},
 
 			render: function() {
-				$( this.el ).html( this.template() );
+				$( this.el ).html( this.template( { calculatorItems: this.itemsCollection } ) );
 				return this;
 			},
 
