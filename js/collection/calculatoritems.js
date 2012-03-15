@@ -5,10 +5,10 @@ define( ['order!backbone',
 		return Backbone.Collection.extend( {
 			model: CalculatorItemModel,
 
-			// url: 'php/mongo-calculatoritem.php',
+			url: 'php/mongo-calculatoritem.php',
 
 			initialize: function() {
-				// this.fetch();
+				this.fetch();
 			}
 		} );
 	}

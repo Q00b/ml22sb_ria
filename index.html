@@ -54,9 +54,9 @@
 			</form>
 			<form>
 				<fieldset>
-					<label>Livsmedel: <select name="use-food-name" id="use-food-name">
+					<label>Livsmedel: <select name="use-food-id" id="use-food-id">
 						<% _.each( foods, function( food ) { %>
-						<option value="<%=food.attributes.id%>"><%=food.attributes.name%></option>
+						<option value="<%=food.id%>"><%=food.attributes.foodname%></option>
 						<% } ); %>
 					</select></label>
 					<input type="submit" name="use-food" id="use-food" value="Använd" />
@@ -71,18 +71,22 @@
 						<tr>
 							<th>Vikt</th>
 							<th>Livsmedel</th>
-							<th>Protein</th>
-							<th>Kolhydrater</th>
-							<th>Fett</th>
+							<th>Protein (g)</th>
+							<th>Kolhydrater (g)</th>
+							<th>Fett (g)</th>
+							<th>Energi (kcal)</th>
 							<th>Ta bort</th>
 						</tr>
-						<% _.each( calculatorItems, function( calculatorItem ) { %>
+						<% _.each( calculatorItems, function( calculatorItem ) {
+								var attr = calculatorItem.attributes.food.attributes;
+						%>
 							<tr>
-								<td><input type="text" name="calculator-item-0-weight" id="calculator-item-0-weight" /></td>
-								<td>Livsmedelsnamn</td>
-								<td>P</td>
-								<td>K</td>
-								<td>F</td>
+								<td><input type="text" name="calculator-item-0-weight" id="calculator-item-0-weight" value="<%= calculatorItem.attributes.weight %>" /></td>
+								<td><%= attr.foodname %></td>
+								<td><%= calc.nutrientWeight( calculatorItem.attributes.weight, attr.protein ) %></td>
+								<td><%= calc.nutrientWeight( calculatorItem.attributes.weight, attr.carbohydrates ) %></td>
+								<td><%= calc.nutrientWeight( calculatorItem.attributes.weight, attr.fat ) %></td>
+								<td><%= calc.energy( calculatorItem.attributes.weight, attr.protein, attr.carbohydrates, attr.fat ) %></td>
 								<td><input type="checkbox" name="calculator-item-0-remove" id="calculator-item-0-remove" value="remove" /></td>
 							</tr>
 						<% } ); %>

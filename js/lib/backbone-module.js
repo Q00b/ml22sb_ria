@@ -1,4 +1,4 @@
-define( ['order!lib/backbone'],
+define( ['order!lib/backbone', 'order!relational'],
 
 	function() {
 		_.noConflict();

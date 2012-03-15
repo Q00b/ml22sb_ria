@@ -13,14 +13,13 @@ switch ( $_SERVER['REQUEST_METHOD'] )
 		{
 			$food = json_decode( $food );
 
-			if ( !$db->RIA->food->findOne( array( 'name' => $food->name, 'user' => $food->user ) ) )
+			if ( !$db->RIA->food->findOne( array( 'foodname' => $food->foodname, 'user' => $food->user ) ) )
 			{
 				$db->RIA->food->insert( $food );
 			} else {
 				header( 'Food name already exists', true, 500 );
 			}
 		}
-
 		break;
 
 	// Get all users.
@@ -32,10 +31,10 @@ switch ( $_SERVER['REQUEST_METHOD'] )
 		foreach ( $cursor as $food )
 		{
 			$foods[] = array(	'_id' => $food['_id']->{'$id'},
-								'name' => $food['name'],
+								'foodname' => $food['foodname'],
 								'protein' => $food['protein'],
-								'carbohydrates' => $food['protein'],
-								'fat' => $food['protein'],
+								'carbohydrates' => $food['carbohydrates'],
+								'fat' => $food['fat'],
 								'user' => $food['user'] );
 		}
 

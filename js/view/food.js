@@ -10,9 +10,16 @@ define( ['order!jQuery',
 			template: _.template( $( '#food-template' ).html() ),
 
 			initialize: function( options ) {
+				_.extend( this, Backbone.Events );
+
 				this.userCollection = options.userCollection;
+				this.calculatorItemsCollection = options.calculatorItemsCollection;
+
 				this.collection.on( 'reset', this.render, this );
-				this.collection.on( 'add', this.render, this );
+
+				this.on( 'AddedFood', this.collection.fetch, this.collection );
+				this.on( 'UsedFood', this.calculatorItemsCollection.fetch, this.calculatorItemsCollection );
+				this.on( 'DeletedFood', this.calculatorItemsCollection.fetch, this.calculatorItemsCollection );
 			},
 
 			render: function() {
@@ -27,7 +34,8 @@ define( ['order!jQuery',
 			},
 
 			createFood: function( e ) {
-				var name = '',
+				var that = this,
+					foodname = '',
 					protein = '',
 					carbohydrates = '',
 					fat = '';
@@ -36,12 +44,12 @@ define( ['order!jQuery',
 
 				// ADD FOOD
 				try {
-					name = $( '#create-food-name' ).val();
+					foodname = $( '#create-food-name' ).val();
 					protein = $( '#create-food-protein' ).val();
 					carbohydrates = $( '#create-food-carbohydrates' ).val();
 					fat = $( '#create-food-fat' ).val();
 
-					if ( !name || !name.match( /^\S+(.+\S+)?$/i ) ) {
+					if ( !foodname || !foodname.match( /^\S+(.+\S+)?$/i ) ) {
 						throw new Error( 'Vänligen ange ett livsmedelsnamn. (Kan ej börja eller sluta med white-space-tecken.)' );
 					}
 
@@ -50,13 +58,13 @@ define( ['order!jQuery',
 					}
 
 					if ( _.find( this.collection.models, function( cmp_food ) {
-						return ( cmp_food.attributes.name == name && cmp_food.attributes.user == Auth.getUserId() );
+						return ( cmp_food.attributes.foodname == foodname && cmp_food.attributes.user == Auth.getUserId() );
 					} ) ) {
 						throw new Error( 'Du har redan ett livsmedel med detta namn.' )
 					}
 
 					this.collection.create( {
-						 name: name,
+						 foodname: foodname,
 						 protein: protein,
 						 carbohydrates: carbohydrates,
 						 fat: fat,
@@ -64,18 +72,48 @@ define( ['order!jQuery',
 					}, {
 						error: function( model, response ) {
 							throw new Error( response );
+						},
+
+						success: function() {
+							that.trigger( 'AddedFood' );
 						}
 					} );
-
-					// Backbone.history.navigate( 'login', { trigger: true } ); 
 				} catch ( er ) {
 					console.log( "Could not add food: " + er.message );
 				}
 			},
 
 			useFood: function( e ) {
+				var that = this,
+					foodId = '';
+
 				e.preventDefault();
-				console.log( "use food" );
+
+				try {
+					foodId = $( '#use-food-id' ).val();
+
+					if ( !_.find( this.collection.models, function( cmp_food ) {
+						return ( cmp_food.attributes._id == foodId );
+					} ) ) {
+						throw new Error( 'Livsmedlet finns inte.' )
+					}
+
+					this.calculatorItemsCollection.create( {
+						 weight: 0,
+						 food: foodId,
+						 user: Auth.getUserId()
+					}, {
+						error: function( model, response ) {
+							throw new Error( response );
+						},
+
+						success: function() {
+							that.trigger( 'UsedFood' );
+						}
+					} );
+				} catch ( er ) {
+					console.log( "Could not use food: " + er.message );
+				}
 			},
 
 			deleteFood: function( e ) {

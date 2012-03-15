@@ -1,13 +1,13 @@
 define( ['order!backbone'],
 
 	function( Backbone ) {
-		return Backbone.Model.extend( {
+		return Backbone.RelationalModel.extend( {
 			idAttribute: '_id',
 
 			url: 'php/mongo-food.php',
 
 			defaults: {
-				name: null,
+				foodname: null,
 				protein: null,
 				carbohydrates: null,
 				fat: null,

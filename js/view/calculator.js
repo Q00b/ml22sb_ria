@@ -17,7 +17,7 @@ define( ['order!jQuery',
 				this.foodCollection = new FoodCollection();
 				this.calculatorItemsCollection = new CalculatorItemsCollection();
 
-				this.foodView = new FoodView( { collection: this.foodCollection, userCollection: this.userCollection } );
+				this.foodView = new FoodView( { collection: this.foodCollection, userCollection: this.userCollection, calculatorItemsCollection: this.calculatorItemsCollection } );
 				this.calculatorItemsView = new CalculatorItemsView( { collection: this.calculatorItemsCollection, userCollection: this.userCollection, foodCollection: this.foodCollection } );
 			},
 

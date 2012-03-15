@@ -1,8 +1,10 @@
 define( ['order!jQuery',
 		 'order!underscore',
-		 'order!backbone'],
+		 'order!backbone',
+		 'order!../auth',
+		 'order!calculate'],
 
-	function( $, _, Backbone ) {
+	function( $, _, Backbone, Auth, Calc ) {
 		return Backbone.View.extend( {
 			tagName: 'div',
 			id: 'calculator-items-container',
@@ -11,10 +13,13 @@ define( ['order!jQuery',
 			initialize: function( options ) {
 				this.userCollection = options.userCollection;
 				this.foodCollection = options.foodCollection;
+
+				this.collection.on( 'reset', this.render, this );
+				this.collection.on( 'add', this.collection.fetch, this.collection );
 			},
 
 			render: function() {
-				$( this.el ).html( this.template( { calculatorItems: this.itemsCollection } ) );
+				$( this.el ).html( this.template( { calculatorItems: this.collection.models, calc: Calc } ) );
 				return this;
 			},
 

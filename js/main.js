@@ -4,7 +4,8 @@ require(
 			order: 'lib/order',
 			jQuery: 'lib/jquery-module',
 			underscore: 'lib/underscore-module',
-			backbone: 'lib/backbone-module'
+			backbone: 'lib/backbone-module',
+			relational: 'lib/backbone-relational'
 		}
 	},
 

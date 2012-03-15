@@ -1,10 +1,16 @@
-define( ['order!backbone'],
+define( ['order!backbone', 'order!../model/food' ],
 
-	function( Backbone ) {
-		return Backbone.Model.extend( {
+	function( Backbone, FoodModel ) {
+		return Backbone.RelationalModel.extend( {
+			relations: [{
+				type: Backbone.HasOne,
+				key: 'food',
+				relatedModel: FoodModel
+			}],
+
 			idAttribute: '_id',
 
-			// url: 'php/mongo-calculatoritem.php',
+			url: 'php/mongo-calculatoritem.php',
 
 			defaults: {
 				weight: null,

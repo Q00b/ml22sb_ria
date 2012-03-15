@@ -7,7 +7,7 @@ $db = new Mongo( 'mongodb://testuser:testpw@staff.mongohq.com:10043/RIA' );
 
 switch ( $_SERVER['REQUEST_METHOD'] )
 {
-	// Add new user.
+	// Add new food.
 	case 'POST' :
 		if ( $user = file_get_contents( 'php://input' ) )
 		{
@@ -23,7 +23,7 @@ switch ( $_SERVER['REQUEST_METHOD'] )
 
 		break;
 
-	// Get all users.
+	// Get all food.
 	case 'GET' :
 		$cursor = $db->RIA->users->find();
 
