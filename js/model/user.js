@@ -4,7 +4,7 @@ define( ['order!backbone'],
 		return Backbone.Model.extend( {
 			idAttribute: '_id',
 
-			url: 'php/mongo-user.php',
+			urlRoot: 'php/mongo-user.php',
 
 			defaults: {
 				username: null,

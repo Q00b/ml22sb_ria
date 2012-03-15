@@ -19,7 +19,7 @@ define( ['order!jQuery',
 
 				this.on( 'AddedFood', this.collection.fetch, this.collection );
 				this.on( 'UsedFood', this.calculatorItemsCollection.fetch, this.calculatorItemsCollection );
-				this.on( 'DeletedFood', this.calculatorItemsCollection.fetch, this.calculatorItemsCollection );
+				this.on( 'DeletedFood', this.collection.fetch, this.collection );
 			},
 
 			render: function() {
@@ -42,7 +42,6 @@ define( ['order!jQuery',
 
 				e.preventDefault();
 
-				// ADD FOOD
 				try {
 					foodname = $( '#create-food-name' ).val();
 					protein = $( '#create-food-protein' ).val();
@@ -74,7 +73,7 @@ define( ['order!jQuery',
 							throw new Error( response );
 						},
 
-						success: function() {
+						success: function( model, response ) {
 							that.trigger( 'AddedFood' );
 						}
 					} );
@@ -107,7 +106,7 @@ define( ['order!jQuery',
 							throw new Error( response );
 						},
 
-						success: function() {
+						success: function( model, response ) {
 							that.trigger( 'UsedFood' );
 						}
 					} );
@@ -117,8 +116,36 @@ define( ['order!jQuery',
 			},
 
 			deleteFood: function( e ) {
+				var that = this,
+					foodId = '',
+					model = {};
+
 				e.preventDefault();
-				console.log( "delete food" );
+
+				try {
+					foodId = $( '#use-food-id' ).val();
+
+					if ( !_.find( this.collection.models, function( cmp_food ) {
+						return ( cmp_food.attributes._id == foodId );
+					} ) ) {
+						throw new Error( 'Livsmedlet finns inte.' )
+					}
+
+					model = this.collection.get( foodId );
+					model.destroy( {
+						error: function( model, response ) {
+							throw new Error( response );
+						},
+
+						success: function( model, response ) {
+							that.trigger( 'DeletedFood' );
+						}
+					} );
+					this.collection.remove( model );
+					
+				} catch ( er ) {
+					console.log( "Could not delete food: " + er.message );
+				}
 			}
 		} );
 	}
