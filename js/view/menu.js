@@ -9,10 +9,20 @@ define( ['order!jQuery',
 			template: _.template( $( '#menu-template' ).html() ),
 
 			initialize: function() {
+				this.userCollection = this.options.userCollection;
+				this.userCollection.on( 'reset', this.render, this );
 			},
 
 			render: function() {
-				$( this.el ).html( this.template( { loggedOut: Auth.isLoggedOut() } ) );
+				var username = '',
+					user = this.userCollection.get( Auth.getUserId() );
+
+				if ( user )
+				{
+					username = user.attributes.username;
+				}
+
+				$( this.el ).html( this.template( { loggedOut: Auth.isLoggedOut(), username: username } ) );
 			},
 
 			events: {

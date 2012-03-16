@@ -1,14 +1,18 @@
 define( ['order!backbone',
+		 'order!../auth',
 		 'order!../model/calculatoritem'],
 
-	function( Backbone, CalculatorItemModel ) {
+	function( Backbone, Auth, CalculatorItemModel ) {
 		return Backbone.Collection.extend( {
 			model: CalculatorItemModel,
 
 			url: 'php/mongo-calculatoritem.php',
 
 			initialize: function() {
-				this.fetch();
+			},
+
+			doFetch: function() {
+				this.fetch( { data: { userid: Auth.getUserId() } } );
 			}
 		} );
 	}

@@ -20,7 +20,7 @@ switch ( $_SERVER['REQUEST_METHOD'] )
 
 	// Get all calculator items.
 	case 'GET' :
-		$cursor = $db->RIA->calculatorItems->find();
+		$cursor = $db->RIA->calculatorItems->find( array( 'user' => $_GET['userid'] ) );
 
 		$calculatorItems = array();
 

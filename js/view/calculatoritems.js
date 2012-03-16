@@ -16,10 +16,8 @@ define( ['order!jQuery',
 				this.userCollection = options.userCollection;
 				this.foodCollection = options.foodCollection;
 
-				this.collection.on( 'reset', this.render, this );
-				
-				this.on( 'UpdateItem', this.collection.fetch, this.collection );
-				this.on( 'DeletedItem', this.collection.fetch, this.collection );
+				this.on( 'UpdateItem', this.collection.doFetch, this.collection );
+				this.on( 'DeletedItem', this.collection.doFetch, this.collection );
 			},
 
 			render: function() {

@@ -24,7 +24,7 @@ switch ( $_SERVER['REQUEST_METHOD'] )
 
 	// Get all food.
 	case 'GET' :
-		$cursor = $db->RIA->food->find();
+		$cursor = $db->RIA->food->find( array( 'user' => $_GET['userid'] ) );
 
 		$foods = array();
 

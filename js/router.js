@@ -20,11 +20,11 @@ define( ['order!jQuery',
 				initialize: function() {
 					this.userCollection = new UserCollection();
 
-					this.calculatorView = new CalculatorView( { userCollection: this.userCollection } );
+					this.calculatorView = new CalculatorView();
 					this.registrationView = new RegistrationView( { collection: this.userCollection  } );
 					this.loginView = new LoginView( { collection: this.userCollection } );
 					this.logoutView = new LogoutView();
-					this.menuView = new MenuView();
+					this.menuView = new MenuView( { userCollection: this.userCollection } );
 				},
 
 				routes: {
@@ -37,6 +37,8 @@ define( ['order!jQuery',
 				index: function() {
 						this.menuView.render();
 						this.calculatorView.render();
+						this.calculatorView.foodCollection.doFetch();
+						this.calculatorView.calculatorItemsCollection.doFetch();
 				},
 
 				register: function() {

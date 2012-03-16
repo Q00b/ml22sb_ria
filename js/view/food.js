@@ -15,11 +15,9 @@ define( ['order!jQuery',
 				this.userCollection = options.userCollection;
 				this.calculatorItemsCollection = options.calculatorItemsCollection;
 
-				this.collection.on( 'reset', this.render, this );
-
-				this.on( 'AddedFood', this.collection.fetch, this.collection );
-				this.on( 'UsedFood', this.calculatorItemsCollection.fetch, this.calculatorItemsCollection );
-				this.on( 'DeletedFood', this.collection.fetch, this.collection );
+				this.on( 'AddedFood', this.collection.doFetch, this.collection );
+				this.on( 'UsedFood', this.calculatorItemsCollection.doFetch, this.calculatorItemsCollection );
+				this.on( 'DeletedFood', this.collection.doFetch, this.collection );
 			},
 
 			render: function() {

@@ -12,7 +12,7 @@ define( ['order!jQuery',
 			},
 
 			render: function() {
-				$( this.el ).html( this.template( { users: this.collection.models } ) );
+				$( this.el ).html( this.template() );
 			},
 
 			events: {

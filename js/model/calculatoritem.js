@@ -1,6 +1,6 @@
-define( ['order!backbone', 'order!../model/food' ],
+define( ['order!backbone', 'order!../auth', 'order!../model/food' ],
 
-	function( Backbone, FoodModel ) {
+	function( Backbone, Auth, FoodModel ) {
 		return Backbone.RelationalModel.extend( {
 			relations: [{
 				type: Backbone.HasOne,
