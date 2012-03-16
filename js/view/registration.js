@@ -10,9 +10,12 @@ define( ['order!jQuery',
 			initialize: function() {
 				_.extend( this, Backbone.Events );
 
-				this.collection.on( 'reset', this.render, this );
+				this.on( 'CreatedUser', this.createdUser, this );
+			},
 
-				this.on( 'CreatedUser', this.collection.fetch, this.collection );
+			createdUser: function() {
+				this.collection.fetch();
+				this.render();
 			},
 
 			render: function() {

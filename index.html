@@ -70,15 +70,17 @@
 								<th class="t-remove">Ta bort</th>
 							</tr>
 							<% _.each( calculatorItems, function( calculatorItem ) {
-									var attr = calculatorItem.attributes.food.attributes;
+									var food = _.find( foods, function( food ) {
+										return calculatorItem.attributes.food == food.attributes._id;
+									} );
 							%>
 								<tr>
 									<td class="t-weight"><input type="text" name="<%= calculatorItem.id %>-weight" id="<%= calculatorItem.id %>-weight" value="<%= calculatorItem.attributes.weight %>" class="calculator-item-update" /></td>
-									<td class="t-food"><%= attr.foodname %></td>
-									<td class="t-nutrient"><%= calc.nutrientWeight( calculatorItem.attributes.weight, attr.protein ) %> g</td>
-									<td class="t-nutrient"><%= calc.nutrientWeight( calculatorItem.attributes.weight, attr.carbohydrates ) %> g</td>
-									<td class="t-nutrient"><%= calc.nutrientWeight( calculatorItem.attributes.weight, attr.fat ) %> g</td>
-									<td class="t-energy"><%= calc.energy( calculatorItem.attributes.weight, attr.protein, attr.carbohydrates, attr.fat ) %> kcal</td>
+									<td class="t-food"><%= food.attributes.foodname %></td>
+									<td class="t-nutrient"><%= calc.nutrientWeight( calculatorItem.attributes.weight, food.attributes.protein ) %> g</td>
+									<td class="t-nutrient"><%= calc.nutrientWeight( calculatorItem.attributes.weight, food.attributes.carbohydrates ) %> g</td>
+									<td class="t-nutrient"><%= calc.nutrientWeight( calculatorItem.attributes.weight, food.attributes.fat ) %> g</td>
+									<td class="t-energy"><%= calc.energy( calculatorItem.attributes.weight, food.attributes.protein, food.attributes.carbohydrates, food.attributes.fat ) %> kcal</td>
 									<td class="t-remove"><input type="button" name="<%= calculatorItem.id %>-remove" id="<%= calculatorItem.id %>-remove" value="Ta bort" class="calculator-item-remove button" /></td>
 								</tr>
 							<% } ); %>

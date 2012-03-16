@@ -22,9 +22,14 @@ define( ['order!jQuery',
 
 				this.on( 'AddedFood', this.foodCollection.doFetch, this.foodCollection );
 				this.on( 'UsedFood', this.calculatorItemsCollection.doFetch, this.calculatorItemsCollection );
-				this.on( 'DeletedFood', this.foodCollection.doFetch, this.foodCollection );
+				this.on( 'DeletedFood', this.deletedFood, this );
 				this.on( 'UpdateItem', this.calculatorItemsCollection.doFetch, this.calculatorItemsCollection );
 				this.on( 'DeletedItem', this.calculatorItemsCollection.doFetch, this.calculatorItemsCollection );
+			},
+
+			deletedFood: function() {
+				this.calculatorItemsCollection.doFetch();
+				this.foodCollection.doFetch();
 			},
 
 			render: function() {
@@ -32,14 +37,18 @@ define( ['order!jQuery',
 			},
 
 			totals: function() {
-				var protein = 0,
+				var that = this,
+					protein = 0,
 					carbohydrates = 0,
 					fat = 0,
-					energy = 0;
+					energy = 0
+					item = {},
+					food = {};
 
-				_.each( this.calculatorItemsCollection.models, function( food ) {
-					var item = food.attributes;
-					var food = food.attributes.food.attributes;
+				_.each( this.calculatorItemsCollection.models, function( item ) {
+					item = item.attributes;
+					food = that.foodCollection.get( item.food );
+					console.log( food );
 
 					protein += Calc.nutrientWeight( item.weight, food.protein );
 					carbohydrates += Calc.nutrientWeight( item.weight, food.carbohydrates );

@@ -1,7 +1,7 @@
 define( ['order!backbone'],
 
 	function( Backbone ) {
-		return Backbone.RelationalModel.extend( {
+		return Backbone.Model.extend( {
 			idAttribute: '_id',
 
 			urlRoot: 'php/mongo-food.php',

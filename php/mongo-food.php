@@ -46,9 +46,13 @@ switch ( $_SERVER['REQUEST_METHOD'] )
 
 	// Delete a food.
 	case 'DELETE' :
-		$foodId = new MongoId( substr( $_SERVER['REQUEST_URI'], strrpos( $_SERVER['REQUEST_URI'], '/' ) + 1 ) );
+		$foodId = substr( $_SERVER['REQUEST_URI'], strrpos( $_SERVER['REQUEST_URI'], '/' ) + 1 );
 
-		if ( !$db->RIA->food->remove( array( '_id' => $foodId ) ) )
+		if ( $db->RIA->food->remove( array( '_id' => new MongoId( $foodId ) ) ) )
+		{
+			$db->RIA->calculatorItems->remove( array( 'food' => $foodId ) );
+		}
+		else
 		{
 			header( 'Could not find food in database.', true, 500 );
 		}

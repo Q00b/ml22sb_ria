@@ -12,6 +12,7 @@ body { background: #FDFEEC; color: #051524; font: 14px/1.5 verdana, arial, helve
 #content-container label { font-weight: bold; display: block; float: left; color: #16223C; background: #D2DCEF; padding: 6px 6px; margin-right: 10px; margin-left: 2px; }
 
 #content-container table { width: 100%; }
+#content-container table tr:nth-child(odd) { background: #E1E8F4; }
 #content-container table th { background: #D2DCEF; }
 	#content-container table th.t-weight { width: 14%; }
 	#content-container table th.t-food { width: 28%; }
@@ -22,8 +23,8 @@ body { background: #FDFEEC; color: #051524; font: 14px/1.5 verdana, arial, helve
 	#content-container table td.t-weight { text-align: center; }
 		#content-container table td.t-weight input { width: 80%; }
 	#content-container table td.t-food { text-align: left; text-indent: 15px; }
-	#content-container table td.t-nutrient { text-align: right; }
-	#content-container table td.t-energy { text-align: right; }
+	#content-container table td.t-nutrient { text-align: right; padding-right: 10px; }
+	#content-container table td.t-energy { text-align: right; padding-right: 10px; }
 	#content-container table td.t-remove { text-align: center; }
 		#content-container table td.t-remove input { }
 
