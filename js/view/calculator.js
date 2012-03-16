@@ -48,12 +48,11 @@ define( ['order!jQuery',
 				_.each( this.calculatorItemsCollection.models, function( item ) {
 					item = item.attributes;
 					food = that.foodCollection.get( item.food );
-					console.log( food );
 
-					protein += Calc.nutrientWeight( item.weight, food.protein );
-					carbohydrates += Calc.nutrientWeight( item.weight, food.carbohydrates );
-					fat += Calc.nutrientWeight( item.weight, food.fat );
-					energy += Calc.energy( item.weight, food.protein, food.carbohydrates, food.fat );
+					protein += Calc.nutrientWeight( item.weight, food.attributes.protein );
+					carbohydrates += Calc.nutrientWeight( item.weight, food.attributes.carbohydrates );
+					fat += Calc.nutrientWeight( item.weight, food.attributes.fat );
+					energy += Calc.energy( item.weight, food.attributes.protein, food.attributes.carbohydrates, food.attributes.fat );
 				} );
 
 				return { protein: protein, carbohydrates: carbohydrates, fat: fat, energy: energy };
