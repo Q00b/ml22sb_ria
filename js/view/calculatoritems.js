@@ -19,6 +19,7 @@ define( ['order!jQuery',
 				this.collection.on( 'reset', this.render, this );
 				
 				this.on( 'UpdateItem', this.collection.fetch, this.collection );
+				this.on( 'DeletedItem', this.collection.fetch, this.collection );
 			},
 
 			render: function() {
@@ -84,15 +85,41 @@ define( ['order!jQuery',
 							that.trigger( 'UpdateItem' );
 						}
 					});
-
-					console.log( model );
 				} catch ( er ) {
 					console.log( "Could not update calculator item: " + er.message );
 				}
 			},
 
 			removeCalculatorItem: function( e ) {
+				var itemId = '',
+					model = {},
+					that = this;
 
+				e.preventDefault();
+
+				try {
+					itemId = e.currentTarget.id.substr( 0, e.currentTarget.id.indexOf( '-remove' ) );
+
+					if ( !itemId || !_.find( this.collection.models, function( cmp_item ) {
+						return ( cmp_item.attributes._id == itemId );
+					} ) ) {
+						throw new Error( 'Raden finns inte.' )
+					}
+
+					model = this.collection.get( itemId );
+					model.destroy( {
+						error: function( model, response ) {
+							throw new Error( response );
+						},
+
+						success: function( model, response ) {
+							that.trigger( 'DeletedItem' );
+						}
+					} );
+					this.collection.remove( model );
+				} catch ( er ) {
+					console.log( "Could not update calculator item: " + er.message );
+				}
 			}
 		} );
 	}

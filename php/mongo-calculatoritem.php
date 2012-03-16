@@ -49,5 +49,12 @@ switch ( $_SERVER['REQUEST_METHOD'] )
 		break;
 
 	case 'DELETE' :
+		$itemId = new MongoId( substr( $_SERVER['REQUEST_URI'], strrpos( $_SERVER['REQUEST_URI'], '/' ) + 1 ) );
+
+		if ( !$db->RIA->calculatorItems->remove( array( '_id' => $itemId ) ) )
+		{
+			header( 'Could not find calculator item in database.', true, 500 );
+		}
+
 		break;
 }

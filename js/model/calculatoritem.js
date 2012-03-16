@@ -10,7 +10,7 @@ define( ['order!backbone', 'order!../model/food' ],
 
 			idAttribute: '_id',
 
-			url: 'php/mongo-calculatoritem.php',
+			urlRoot: 'php/mongo-calculatoritem.php',
 
 			defaults: {
 				weight: null,
