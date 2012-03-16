@@ -1,7 +1,6 @@
 define( ['order!jQuery',
 		 'order!underscore',
 		 'order!backbone',
-		 'order!auth',
 		 'order!collection/users',
 		 'order!view/registration',
 		 'order!view/login',
@@ -9,7 +8,7 @@ define( ['order!jQuery',
 		 'order!view/logout',
 		 'order!view/menu'],
 
-	function( $, _, Backbone, Auth, UserCollection, RegistrationView, LoginView, CalculatorView, LogoutView, MenuView ) {
+	function( $, _, Backbone, UserCollection, RegistrationView, LoginView, CalculatorView, LogoutView, MenuView ) {
 		return {
 			run: function() {
 				new this.router();
@@ -42,23 +41,13 @@ define( ['order!jQuery',
 				},
 
 				register: function() {
-					var that = this;
-
 					this.menuView.render();
-
-					this.userCollection.onReset( function( collection ) {
-						that.registrationView.render();
-					} );
+					this.registrationView.render();
 				},
 
 				login: function() {
-					var that = this;
-
 					this.menuView.render();
-
-					this.userCollection.onReset( function( collection ) {
-						that.loginView.render();
-					} );
+					this.loginView.render();
 				},
 
 				logout: function() {

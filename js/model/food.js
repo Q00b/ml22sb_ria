@@ -1,6 +1,6 @@
-define( ['order!backbone', 'order!../auth'],
+define( ['order!backbone'],
 
-	function( Backbone, Auth ) {
+	function( Backbone ) {
 		return Backbone.RelationalModel.extend( {
 			idAttribute: '_id',
 

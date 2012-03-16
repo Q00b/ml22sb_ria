@@ -8,7 +8,9 @@ define( ['order!jQuery',
 			template: _.template( $( '#registration-template' ).html() ),
 
 			initialize: function() {
-				this.collection.on( 'add', this.render, this );
+				_.extend( this, Backbone.Events );
+				
+				this.on( 'CreatedUser', this.collection.fetch, this.collection );
 			},
 
 			render: function() {
@@ -20,7 +22,8 @@ define( ['order!jQuery',
 			},
 
 			register: function( e ) {
-				var regName = '',
+				var that = this,
+					regName = '',
 					regPw = '',
 					regPwRepeat = '';
 
@@ -53,10 +56,13 @@ define( ['order!jQuery',
 					}, {
 						error: function( model, response ) {
 							throw new Error( response );
+						},
+						success: function( model, response ) {
+							that.trigger( 'CreatedUser' );
 						}
 					} );
 
-					Backbone.history.navigate( 'login', { trigger: true } ); 
+					// Backbone.history.navigate( 'login', { trigger: true } ); 
 				} catch ( er ) {
 					console.log( "Could not register: " + er.message );
 				}
