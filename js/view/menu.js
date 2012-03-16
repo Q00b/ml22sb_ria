@@ -1,3 +1,6 @@
+/**
+ * @description Menu view. Displays and handles the application main menu for navigation.
+ */
 define( ['order!jQuery',
 		 'order!underscore',
 		 'order!backbone',

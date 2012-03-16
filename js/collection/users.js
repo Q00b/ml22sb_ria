@@ -1,3 +1,6 @@
+/**
+ * @description Users collection.
+ */
 define( ['order!backbone',
 		 'order!../model/user'],
 
@@ -7,6 +10,10 @@ define( ['order!backbone',
 
 			url: 'php/mongo-user.php',
 
+			/**
+			 * @description Initializes the collection calling fetch() to populate it.
+			 * @function
+			 */
 			initialize: function() {
 				this.fetch();
 			}

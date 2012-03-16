@@ -1,3 +1,6 @@
+/**
+ * @description User model.
+ */
 define( ['order!backbone'],
 
 	function( Backbone ) {

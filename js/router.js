@@ -1,3 +1,6 @@
+/**
+ * @description The Backbone router.
+ */
 define( ['order!jQuery',
 		 'order!underscore',
 		 'order!backbone',
@@ -10,12 +13,20 @@ define( ['order!jQuery',
 
 	function( $, _, Backbone, UserCollection, RegistrationView, LoginView, CalculatorView, LogoutView, MenuView ) {
 		return {
+			/**
+			 * @description Run the router and set Backbones history to start here.
+			 * @function
+			 */
 			run: function() {
 				new this.router();
 				Backbone.history.start();
 			},
 
 			router: Backbone.Router.extend( {
+				/**
+				 * @description Initializes the application. Instantiates necessary views. The user collection is instantiated here because it will be shared by the login- and registration-Views.
+				 * @function
+				 */
 				initialize: function() {
 					this.userCollection = new UserCollection();
 
@@ -26,6 +37,9 @@ define( ['order!jQuery',
 					this.menuView = new MenuView( { userCollection: this.userCollection } );
 				},
 
+				/**
+				 * @description Backbone route names and their corresponding functions.
+				 */
 				routes: {
 					'':			'index',
 					'register':	'register',
@@ -33,6 +47,10 @@ define( ['order!jQuery',
 					'logout':	'logout'
 				},
 
+				/**
+				 * @description The default route. Renders the application menu and the calculator view. Also calls for doFetch() on the collections it uses to (re-)populate them.
+				 * @function
+				 */
 				index: function() {
 						this.menuView.render();
 						this.calculatorView.render();
@@ -40,16 +58,28 @@ define( ['order!jQuery',
 						this.calculatorView.calculatorItemsCollection.doFetch();
 				},
 
+				/**
+				 * @description The #register route. Renders the application menu and the registration view.
+				 * @function
+				 */
 				register: function() {
 					this.menuView.render();
 					this.registrationView.render();
 				},
 
+				/**
+				 * @description The #login route. Renders the application menu and the login view.
+				 * @function
+				 */
 				login: function() {
 					this.menuView.render();
 					this.loginView.render();
 				},
 
+				/**
+				 * @description The #logout route. Renders the application menu and calls for a logout.
+				 * @function
+				 */
 				logout: function() {
 					this.menuView.render();
 					this.logoutView.logout();

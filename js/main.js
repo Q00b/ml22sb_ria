@@ -1,4 +1,10 @@
+/**
+ * @description The application entrance. Sets Require.js configuration and runs the backbone router.
+ */
 require(
+	/**
+	 * @description Configuration.
+	 */
 	{
 		paths: {
 			order: 'lib/order',

@@ -1,3 +1,6 @@
+/**
+ * @description Food collection.
+ */
 define( ['order!backbone',
 		 'order!../auth',
 		 'order!../model/food'],
@@ -8,9 +11,10 @@ define( ['order!backbone',
 
 			url: 'php/mongo-food.php',
 
-			initialize: function() {
-			},
-
+			/**
+			 * @description Calls for a fetch on this collection providing the logged in users id.
+			 * @function
+			 */
 			doFetch: function() {
 				this.fetch( { data: { userid: Auth.getUserId() } } );
 			}

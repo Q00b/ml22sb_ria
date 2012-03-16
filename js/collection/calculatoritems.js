@@ -1,3 +1,6 @@
+/**
+ * @description CalculatorItems Collection.
+ */
 define( ['order!backbone',
 		 'order!../auth',
 		 'order!../model/calculatoritem'],
@@ -8,9 +11,10 @@ define( ['order!backbone',
 
 			url: 'php/mongo-calculatoritem.php',
 
-			initialize: function() {
-			},
-
+			/**
+			 * @description Calls for a fetch on this collection providing the logged in users id.
+			 * @function
+			 */
 			doFetch: function() {
 				this.fetch( { data: { userid: Auth.getUserId() } } );
 			}

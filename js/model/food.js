@@ -1,3 +1,6 @@
+/**
+ * @description Food model. Contains data to be used for the nutrition calculator food.
+ */
 define( ['order!backbone'],
 
 	function( Backbone ) {

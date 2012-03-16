@@ -1,3 +1,6 @@
+/**
+ * @description Logout view. Simply calls for a logout and navigates on to the application index.
+ */
 define( ['order!jQuery',
 		 'order!underscore',
 		 'order!backbone',
