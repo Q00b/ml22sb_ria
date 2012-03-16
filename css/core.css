@@ -2,8 +2,8 @@
 
 body { background: #FDFEEC; color: #051524; font: 14px/1.5 verdana, arial, helvetica, sans-serif; }
 
-#menu-container { border-bottom: 1px solid #848B9A; padding: 10px 10px 0 10px; background: #F0F3FA; }
-#menu-container a { font: bold 18px georgia, arial, sans-serif; color: #fff; text-decoration: none; margin-left: 10px; padding: 5px 10px 10px 10px; background: #4167b3; }
+#menu-container { border-bottom: 1px solid #848B9A; padding: 5px 10px 5px 23px; background: #F0F3FA; overflow: auto; }
+#menu-container a { display: block; float: left; font: bold 18px georgia, arial, sans-serif; color: #fff; text-decoration: none; margin-left: 10px; padding: 5px 10px 5px 10px; background: #4167b3; }
 #menu-container a:hover { background: #6989C9; }
 
 #content-container { padding: 20px; }

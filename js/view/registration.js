@@ -9,7 +9,9 @@ define( ['order!jQuery',
 
 			initialize: function() {
 				_.extend( this, Backbone.Events );
-				
+
+				this.collection.on( 'reset', this.render, this );
+
 				this.on( 'CreatedUser', this.collection.fetch, this.collection );
 			},
 
@@ -58,6 +60,7 @@ define( ['order!jQuery',
 							throw new Error( response );
 						},
 						success: function( model, response ) {
+							console.log( 'Registrerad!.' );
 							that.trigger( 'CreatedUser' );
 						}
 					} );

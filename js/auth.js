@@ -8,6 +8,7 @@ define( [],
 
 			login: function( userId ) {
 				document.cookie = userId;
+				console.log( 'Inloggad!' );
 			},
 
 			logout: function() {
