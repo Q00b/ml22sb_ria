@@ -81,17 +81,16 @@
 								var attr = calculatorItem.attributes.food.attributes;
 						%>
 							<tr>
-								<td><input type="text" name="calculator-item-0-weight" id="calculator-item-0-weight" value="<%= calculatorItem.attributes.weight %>" /></td>
+								<td><input type="text" name="<%= calculatorItem.id %>-weight" id="<%= calculatorItem.id %>-weight" value="<%= calculatorItem.attributes.weight %>" class="calculator-item-update" /></td>
 								<td><%= attr.foodname %></td>
 								<td><%= calc.nutrientWeight( calculatorItem.attributes.weight, attr.protein ) %></td>
 								<td><%= calc.nutrientWeight( calculatorItem.attributes.weight, attr.carbohydrates ) %></td>
 								<td><%= calc.nutrientWeight( calculatorItem.attributes.weight, attr.fat ) %></td>
 								<td><%= calc.energy( calculatorItem.attributes.weight, attr.protein, attr.carbohydrates, attr.fat ) %></td>
-								<td><input type="checkbox" name="calculator-item-0-remove" id="calculator-item-0-remove" value="remove" /></td>
+								<td><input type="button" name="<%= calculatorItem.id %>-remove" id="<%= calculatorItem.id %>-remove" value="Ta bort" class="calculator-item-remove" /></td>
 							</tr>
 						<% } ); %>
 					</table>
-					<input type="submit" name="calculator-update" id="calculator-update" value="Genomför ändringar" />
 				</fieldset>
 			</form>
 			<dl>

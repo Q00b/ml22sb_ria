@@ -11,15 +11,19 @@ define( ['order!jQuery',
 			template: _.template( $( '#calculator-items-template' ).html() ),
 
 			initialize: function( options ) {
+				_.extend( this, Backbone.Events );
+
 				this.userCollection = options.userCollection;
 				this.foodCollection = options.foodCollection;
 
 				this.collection.on( 'reset', this.render, this );
-				this.collection.on( 'add', this.collection.fetch, this.collection );
+				
+				this.on( 'UpdateItem', this.collection.fetch, this.collection );
 			},
 
 			render: function() {
 				$( this.el ).html( this.template( { calculatorItems: this.collection.models, calc: Calc, totals: this.totals() } ) );
+
 				return this;
 			},
 
@@ -43,12 +47,52 @@ define( ['order!jQuery',
 			},
 
 			events: {
-				'click #calculator-update' : 'updateCalculatorItems'
+				'change .calculator-item-update': 'updateCalculatorItem',
+				'click .calculator-item-remove': 'removeCalculatorItem'
 			},
 
-			updateCalculatorItems: function( e ) {
+			updateCalculatorItem: function( e ) {
+				var itemId = '',
+					weight = '',
+					model = {},
+					that = this;
+
 				e.preventDefault();
-				console.log( "Update Items True" );
+
+				try {
+					itemId = e.currentTarget.id.substr( 0, e.currentTarget.id.indexOf( '-weight' ) );
+					weight = e.currentTarget.value;
+
+					if ( !weight || !weight.match( /^[0-9]+$/i ) ) {
+						throw new Error( 'Du måste ange vikt i gram som heltal.' );
+					}
+
+					if ( !itemId || !_.find( this.collection.models, function( cmp_item ) {
+						return ( cmp_item.attributes._id == itemId );
+					} ) ) {
+						throw new Error( 'Raden finns inte.' )
+					}
+
+					model = this.collection.get( itemId );
+					model.save( { weight: weight }, {
+						error: function( model, response ) {
+							throw new Error( response.msg );
+						},
+
+						success: function( model, response ) {
+							console.log("updated")
+							that.trigger( 'UpdateItem' );
+						}
+					});
+
+					console.log( model );
+				} catch ( er ) {
+					console.log( "Could not update calculator item: " + er.message );
+				}
+			},
+
+			removeCalculatorItem: function( e ) {
+
 			}
 		} );
 	}

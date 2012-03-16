@@ -36,6 +36,16 @@ switch ( $_SERVER['REQUEST_METHOD'] )
 		break;
 
 	case 'PUT' :
+		if ( $calculatorItem = file_get_contents( 'php://input' ) )
+		{
+			$calculatorItem = json_decode( $calculatorItem );
+
+			if ( !$db->RIA->calculatorItems->update( array( '_id' => new MongoId( $calculatorItem->_id ) ), array( '$set' => array( 'weight' => $calculatorItem->weight ) ) ) )
+			{
+				header( 'Could not update weight in database.', true, 500 );
+			}
+		}
+
 		break;
 
 	case 'DELETE' :
