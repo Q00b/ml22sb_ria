@@ -11,7 +11,7 @@ define( ['order!jQuery',
 			el: $( '#menu-container' ),
 			template: _.template( $( '#menu-template' ).html() ),
 
-			initialize: function() {
+			initialize: function( options ) {
 				this.userCollection = this.options.userCollection;
 				this.userCollection.on( 'reset', this.render, this );
 			},

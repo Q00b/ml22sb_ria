@@ -29,8 +29,10 @@ define( ['order!jQuery',
 				 */
 				initialize: function() {
 					this.userCollection = new UserCollection();
+					this.foodCollection = new FoodCollection();
+					this.calculatorItemsCollection = new CalculatorItemsCollection();
 
-					this.calculatorView = new CalculatorView();
+					this.calculatorView = new CalculatorView( foodCollection: this.foodCollection, calculatorItemsCollection: this.calculatorItemsCollection );
 					this.registrationView = new RegistrationView( { collection: this.userCollection  } );
 					this.loginView = new LoginView( { collection: this.userCollection } );
 					this.logoutView = new LogoutView();
@@ -54,8 +56,8 @@ define( ['order!jQuery',
 				index: function() {
 						this.menuView.render();
 						this.calculatorView.render();
-						this.calculatorView.foodCollection.doFetch();
-						this.calculatorView.calculatorItemsCollection.doFetch();
+						// this.calculatorView.foodCollection.doFetch();
+						// this.calculatorView.calculatorItemsCollection.doFetch();
 				},
 
 				/**

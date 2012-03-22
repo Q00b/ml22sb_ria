@@ -22,8 +22,8 @@ define( ['order!jQuery',
 			initialize: function( options ) {
 				_.extend( this, Backbone.Events );
 
-				this.foodCollection = new FoodCollection();
-				this.calculatorItemsCollection = new CalculatorItemsCollection();
+				this.foodCollection = this.options.foodCollection;
+				this.calculatorItemsCollection = this.options.calculatorItemsCollection;
 
 				this.foodCollection.on( 'reset', this.render, this );
 				this.calculatorItemsCollection.on( 'reset', this.render, this );
