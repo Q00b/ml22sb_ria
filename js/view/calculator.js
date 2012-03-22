@@ -5,11 +5,9 @@ define( ['order!jQuery',
 		 'order!underscore',
 		 'order!backbone',
 		 'order!../auth',
-		 'order!../collection/food',
-		 'order!../collection/calculatoritems',
 		 'order!calculate'],
 
-	function( $, _, Backbone, Auth, FoodCollection, CalculatorItemsCollection, Calc ) {
+	function( $, _, Backbone, Auth, Calc ) {
 		return Backbone.View.extend( {
 			el: $( '#content-container' ),
 			template: _.template( $( '#calculator-template' ).html() ),

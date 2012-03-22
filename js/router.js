@@ -5,13 +5,16 @@ define( ['order!jQuery',
 		 'order!underscore',
 		 'order!backbone',
 		 'order!collection/users',
+		 'order!collection/food',
+		 'order!collection/calculatoritems',
 		 'order!view/registration',
 		 'order!view/login',
 		 'order!view/calculator',
 		 'order!view/logout',
-		 'order!view/menu'],
+		 'order!view/menu',
+		 'order!auth'],
 
-	function( $, _, Backbone, UserCollection, RegistrationView, LoginView, CalculatorView, LogoutView, MenuView ) {
+	function( $, _, Backbone, UserCollection, FoodCollection, CalculatorItemsCollection, RegistrationView, LoginView, CalculatorView, LogoutView, MenuView, Auth ) {
 		return {
 			/**
 			 * @description Run the router and set Backbones history to start here.
@@ -32,7 +35,7 @@ define( ['order!jQuery',
 					this.foodCollection = new FoodCollection();
 					this.calculatorItemsCollection = new CalculatorItemsCollection();
 
-					this.calculatorView = new CalculatorView( foodCollection: this.foodCollection, calculatorItemsCollection: this.calculatorItemsCollection );
+					this.calculatorView = new CalculatorView( { foodCollection: this.foodCollection, calculatorItemsCollection: this.calculatorItemsCollection } );
 					this.registrationView = new RegistrationView( { collection: this.userCollection  } );
 					this.loginView = new LoginView( { collection: this.userCollection } );
 					this.logoutView = new LogoutView();
@@ -83,8 +86,8 @@ define( ['order!jQuery',
 				 * @function
 				 */
 				logout: function() {
-					this.menuView.render();
-					this.logoutView.logout();
+					Auth.logout();
+					Backbone.history.navigate( '', { trigger: true } );
 				}
 			} )
 		};
