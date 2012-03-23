@@ -46,19 +46,16 @@ define( ['order!jQuery',
 						throw new Error( 'Felaktigt lösenord.' );
 					}
 
-					// Check if the user exists in the collection.
+					// Check if the user already exists in the user collection.
 					if ( !this.collection.find( function( user ) {
 						if ( user.attributes.username == loginName && user.attributes.password == loginPw ) {
-							return user;
+							Auth.login( user.id );
+							Backbone.history.navigate( '', { trigger: true } );
+							return true;
 						}
 					} ) ) {
-						throw new Error( 'Felaktigt användarnamn eller lösenord.' );
+						throw new Error( 'Felaktigt användarnamn eller lösenord' );
 					}
-
-					// Login the user.
-					Auth.login( user.id );
-
-					Backbone.history.navigate( '', { trigger: true } );
 				} catch ( er ) {
 					console.log( "Could not login: " + er.message );
 				}
