@@ -4,10 +4,9 @@
 define( ['order!jQuery',
 		 'order!underscore',
 		 'order!backbone',
-		 'order!../auth',
-		 'order!calculate'],
+		 'order!../auth'],
 
-	function( $, _, Backbone, Auth, Calc ) {
+	function( $, _, Backbone, Auth ) {
 		return Backbone.View.extend( {
 			el: $( '#content-container' ),
 			template: _.template( $( '#calculator-template' ).html() ),
@@ -34,38 +33,12 @@ define( ['order!jQuery',
 			},
 
 			deletedFood: function() {
-				this.calculatorItemsCollection.doFetch();
 				this.foodCollection.doFetch();
+				this.calculatorItemsCollection.doFetch();
 			},
 
 			render: function() {
-				$( this.el ).html( this.template( { loggedOut: Auth.isLoggedOut(), foods: this.foodCollection.models, calculatorItems: this.calculatorItemsCollection.models, totals: this.totals(), calc: Calc } ) );
-			},
-
-			/**
-			 * @function
-			 * @description Calculates the nutrition value totals from all calculator items.
-			 */
-			totals: function() {
-				var that = this,
-					protein = 0,
-					carbohydrates = 0,
-					fat = 0,
-					energy = 0
-					item = {},
-					food = {};
-
-				_.each( this.calculatorItemsCollection.models, function( item ) {
-					item = item.attributes;
-					food = that.foodCollection.get( item.food );
-
-					protein += Calc.nutrientWeight( item.weight, food.attributes.protein );
-					carbohydrates += Calc.nutrientWeight( item.weight, food.attributes.carbohydrates );
-					fat += Calc.nutrientWeight( item.weight, food.attributes.fat );
-					energy += Calc.energy( item.weight, food.attributes.protein, food.attributes.carbohydrates, food.attributes.fat );
-				} );
-
-				return { protein: protein, carbohydrates: carbohydrates, fat: fat, energy: energy };
+				$( this.el ).html( this.template( { loggedOut: Auth.isLoggedOut(), foods: this.foodCollection.models, calculatorItems: this.calculatorItemsCollection.models, totals: this.calculatorItemsCollection.totals() } ) );
 			},
 
 			events: {

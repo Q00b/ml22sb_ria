@@ -2,10 +2,11 @@
  * @description CalculatorItems Collection.
  */
 define( ['order!backbone',
+		 'order!underscore',
 		 'order!../auth',
 		 'order!../model/calculatoritem'],
 
-	function( Backbone, Auth, CalculatorItemModel ) {
+	function( Backbone, _, Auth, CalculatorItemModel ) {
 		return Backbone.Collection.extend( {
 			model: CalculatorItemModel,
 
@@ -17,7 +18,29 @@ define( ['order!backbone',
 			 */
 			doFetch: function() {
 				this.fetch( { data: { userid: Auth.getUserId() } } );
-			}
+			},
+
+			/**
+			 * @function
+			 * @description Calculates the nutrition value totals from all calculator items.
+			 * @param {Object} foodCollection Food used in the calculator items models.
+			 */
+			totals: function() {
+				var that = this,
+					protein = 0,
+					carbohydrates = 0,
+					fat = 0,
+					energy = 0;
+
+				_.each( this.models, function( calculatorItem ) {
+					protein += calculatorItem.protein();
+					carbohydrates += calculatorItem.carbohydrates();
+					fat += calculatorItem.fat();
+					energy += calculatorItem.energy();
+				} );
+
+				return { protein: protein, carbohydrates: carbohydrates, fat: fat, energy: energy };
+			},
 		} );
 	}
 );

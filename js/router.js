@@ -59,8 +59,8 @@ define( ['order!jQuery',
 				index: function() {
 						this.menuView.render();
 						this.calculatorView.render();
-						// this.calculatorView.foodCollection.doFetch();
-						// this.calculatorView.calculatorItemsCollection.doFetch();
+						this.foodCollection.doFetch();
+						this.calculatorItemsCollection.doFetch();
 				},
 
 				/**
