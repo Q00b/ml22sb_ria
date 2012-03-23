@@ -73,18 +73,8 @@ define( ['order!jQuery',
 					carbohydrates = $( '#create-food-carbohydrates' ).val();
 					fat = $( '#create-food-fat' ).val();
 
-					// Validate food name.
-					if ( !foodname || !foodname.match( /^\S+(.+\S+)?$/i ) ) {
-						throw new Error( 'Vänligen ange ett livsmedelsnamn. (Kan ej börja eller sluta med white-space-tecken.)' );
-					}
-
-					// Validate nutrition values.
-					if ( !protein.match( /^[0-9]+$/i ) || !carbohydrates.match( /^[0-9]+$/i ) || !fat.match( /^[0-9]+$/i ) ) {
-						throw new Error( 'Vänligen ange siffror för mängd makronutrienter.' );
-					}
-
 					// Check if the food name already exists.
-					if ( _.find( this.foodCollection.models, function( cmp_food ) {
+					if ( this.foodCollection.find( function( cmp_food ) {
 						return ( cmp_food.attributes.foodname == foodname && cmp_food.attributes.user == Auth.getUserId() );
 					} ) ) {
 						throw new Error( 'Du har redan ett livsmedel med detta namn.' )
@@ -125,13 +115,13 @@ define( ['order!jQuery',
 					foodId = $( '#use-food-id' ).val();
 
 					// Check if the food actually exists.
-					if ( !_.find( this.foodCollection.models, function( cmp_food ) {
+					if ( !this.foodCollection.find( function( cmp_food ) {
 						return ( cmp_food.attributes._id == foodId );
 					} ) ) {
 						throw new Error( 'Livsmedlet finns inte.' )
 					}
 
-					// Add a new calculator item to calculate on the food.
+					// Add the calculator item to the collection and database.
 					this.calculatorItemsCollection.create( {
 						 weight: 0,
 						 food: foodId,
@@ -165,7 +155,7 @@ define( ['order!jQuery',
 					foodId = $( '#use-food-id' ).val();
 
 					// Check if the food actually exists.
-					if ( !_.find( this.foodCollection.models, function( cmp_food ) {
+					if ( !this.foodCollection.find( function( cmp_food ) {
 						return ( cmp_food.attributes._id == foodId );
 					} ) ) {
 						throw new Error( 'Livsmedlet finns inte.' )
@@ -206,13 +196,8 @@ define( ['order!jQuery',
 					itemId = e.currentTarget.id.substr( 0, e.currentTarget.id.indexOf( '-weight' ) );
 					weight = e.currentTarget.value;
 
-					// Validate weight value.
-					if ( !weight || !weight.match( /^[0-9]+$/i ) ) {
-						throw new Error( 'Du måste ange vikt i gram som heltal.' );
-					}
-
 					// Check if the calculator item actually exists.
-					if ( !itemId || !_.find( this.calculatorItemsCollection.models, function( cmp_item ) {
+					if ( !itemId || !this.calculatorItemsCollection.find( function( cmp_item ) {
 						return ( cmp_item.attributes._id == itemId );
 					} ) ) {
 						throw new Error( 'Raden finns inte.' )
@@ -250,7 +235,7 @@ define( ['order!jQuery',
 					itemId = e.currentTarget.id.substr( 0, e.currentTarget.id.indexOf( '-remove' ) );
 
 					// Check if the calculator item actually exists.
-					if ( !itemId || !_.find( this.calculatorItemsCollection.models, function( cmp_item ) {
+					if ( !itemId || !this.calculatorItemsCollection.find( function( cmp_item ) {
 						return ( cmp_item.attributes._id == itemId );
 					} ) ) {
 						throw new Error( 'Raden finns inte.' )
@@ -269,7 +254,7 @@ define( ['order!jQuery',
 					} );
 					this.calculatorItemsCollection.remove( model );
 				} catch ( er ) {
-					console.log( "Could not update calculator item: " + er.message );
+					console.log( "Could not remove calculator item: " + er.message );
 				}
 			}
 		} );

@@ -23,6 +23,13 @@ define( ['order!backbone',
 				user: null
 			},
 
+			validate: function( attrs ) {
+				// Validate weight value.
+				if ( !attrs.weight.match( /^[0-9]+$/i ) ) {
+					throw new Error( 'Du måste ange vikt i gram som heltal.' );
+				}
+			},
+
 			/**
 			 * @function
 			 * @description Calculates the amount of protein (in grams) depending on the food weight.
