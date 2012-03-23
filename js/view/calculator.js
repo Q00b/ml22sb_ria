@@ -123,7 +123,7 @@ define( ['order!jQuery',
 
 					// Add the calculator item to the collection and database.
 					this.calculatorItemsCollection.create( {
-						 weight: 0,
+						 weight: "0",
 						 food: foodId,
 						 user: Auth.getUserId()
 					}, {
