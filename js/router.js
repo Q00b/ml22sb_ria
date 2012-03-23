@@ -59,8 +59,12 @@ define( ['order!jQuery',
 				index: function() {
 						this.menuView.render();
 						this.calculatorView.render();
-						this.foodCollection.doFetch();
-						this.calculatorItemsCollection.doFetch();
+
+						if ( !Auth.isLoggedOut() )
+						{
+							this.foodCollection.doFetch();
+							this.calculatorItemsCollection.doFetch();
+						}
 				},
 
 				/**
