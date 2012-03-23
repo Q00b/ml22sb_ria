@@ -1,5 +1,5 @@
 /**
- * @description CalculatorItems Collection.
+ * @description A Backbone collection containing calculatoritem models.
  */
 define( ['order!backbone',
 		 'order!underscore',

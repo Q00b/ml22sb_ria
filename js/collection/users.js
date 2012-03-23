@@ -1,5 +1,5 @@
 /**
- * @description Users collection.
+ * @description A Backbone collection containing user models.
  */
 define( ['order!backbone',
 		 'order!../model/user'],

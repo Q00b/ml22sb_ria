@@ -1,5 +1,5 @@
 /**
- * @description Food collection.
+ * @description A Backbone collection containing food models.
  */
 define( ['order!backbone',
 		 'order!../auth',

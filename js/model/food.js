@@ -1,5 +1,5 @@
 /**
- * @description Food model. Contains data to be used for the nutrition calculator food.
+ * @description Food model. Contains data for users food stored in the application.
  */
 define( ['order!backbone'],
 

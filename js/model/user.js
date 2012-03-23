@@ -1,5 +1,5 @@
 /**
- * @description User model.
+ * @description User model. A user of the nutrition calculator application.
  */
 define( ['order!backbone'],
 

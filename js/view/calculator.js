@@ -1,5 +1,5 @@
 /**
- * @description Calculator view. Displays and handles the nutrition calculator.
+ * @description Calculator view. Displays the nutrition calculator and handles its user interaction.
  */
 define( ['order!jQuery',
 		 'order!underscore',
