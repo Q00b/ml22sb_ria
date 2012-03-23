@@ -28,8 +28,7 @@ define( ['order!jQuery',
 			 */
 			login: function( e ) {
 				var loginName = '',
-					loginPw = '',
-					user = {};
+					loginPw = '';
 
 				e.preventDefault();
 
@@ -48,14 +47,11 @@ define( ['order!jQuery',
 					}
 
 					// Check if the user exists in the collection.
-					user = _.find( this.collection.models, function( cmp_user ) {
-						if ( cmp_user.attributes.username == loginName ) {
-							return cmp_user;
+					if ( !this.collection.find( function( user ) {
+						if ( user.attributes.username == loginName && user.attributes.password == loginPw ) {
+							return user;
 						}
-					} );
-
-					// Check if the username + password combo matches.
-					if ( !user || user.attributes.username !== loginName || user.attributes.password !== loginPw ) {
+					} ) ) {
 						throw new Error( 'Felaktigt användarnamn eller lösenord.' );
 					}
 

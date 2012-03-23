@@ -54,21 +54,14 @@ define( ['order!jQuery',
 					regPwRepeat = $( '#registration-pwrepeat' ).val();
 
 					// Check if the user already exists in the user collection.
-					if ( _.find( this.collection.models, function( cmp_user ) {
-						return ( cmp_user.attributes.username == regName );
+					if ( this.collection.find( function( user ) {
+						return ( user.attributes.username == regName );
 					} ) ) {
-						throw new Error( 'Användarnamnet är upptaget.' )
+						throw new Error( 'Användarnamnet är upptaget' );
 					}
 
-					// Check if the username is valid.
-					if ( !regName || !regName.match( /^[A-z0-9_]{4,20}$/i ) ) {
-						throw new Error( 'Vänligen ange ett giltigt användarnamn (4-20 tecken: A-z 0-9 _).' );
-					}
-
-					// Check if the password is valid.
-					if ( !regPw || !regPwRepeat || !regPw.match( /^\S{4,20}$/i ) ) {
-						throw new Error( 'Vänligen ange ett giltigt lösenord (4-20 icke-whitespace tecken).' );
-					} else if ( regPw !== regPwRepeat ) {
+					// Check if the password matches the repeat.
+					if ( regPw !== regPwRepeat ) {
 						throw new Error( 'De två angivna lösenorden matchar inte.' );
 					}
 
@@ -81,7 +74,7 @@ define( ['order!jQuery',
 							throw new Error( response );
 						},
 						success: function( model, response ) {
-							console.log( 'Registrerad!.' );
+							console.log( 'Registrerad!' );
 							that.trigger( 'CreatedUser' );
 						}
 					} );

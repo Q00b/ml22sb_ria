@@ -10,11 +10,10 @@ define( ['order!jQuery',
 		 'order!view/registration',
 		 'order!view/login',
 		 'order!view/calculator',
-		 'order!view/logout',
 		 'order!view/menu',
 		 'order!auth'],
 
-	function( $, _, Backbone, UserCollection, FoodCollection, CalculatorItemsCollection, RegistrationView, LoginView, CalculatorView, LogoutView, MenuView, Auth ) {
+	function( $, _, Backbone, UserCollection, FoodCollection, CalculatorItemsCollection, RegistrationView, LoginView, CalculatorView, MenuView, Auth ) {
 		return {
 			/**
 			 * @description Run the router and set Backbones history to start here.
@@ -38,7 +37,6 @@ define( ['order!jQuery',
 					this.calculatorView = new CalculatorView( { foodCollection: this.foodCollection, calculatorItemsCollection: this.calculatorItemsCollection } );
 					this.registrationView = new RegistrationView( { collection: this.userCollection  } );
 					this.loginView = new LoginView( { collection: this.userCollection } );
-					this.logoutView = new LogoutView();
 					this.menuView = new MenuView( { userCollection: this.userCollection } );
 				},
 
@@ -60,8 +58,7 @@ define( ['order!jQuery',
 						this.menuView.render();
 						this.calculatorView.render();
 
-						if ( !Auth.isLoggedOut() )
-						{
+						if ( !Auth.isLoggedOut() ) {
 							this.foodCollection.doFetch();
 							this.calculatorItemsCollection.doFetch();
 						}
