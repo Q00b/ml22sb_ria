@@ -1,6 +1,6 @@
 # Nutrition calculator
 This is a nutrition calculator which allows users who have registered to save food with their nutrition data. The user can afterwards use these to calculate total nutrition values and energy from a desired amount of food. This application does not take all possible nutrition data into account but only the macro nutrients Protein, Carbohydrates and Fat.
-
+ 
 The application is writtein mainly in javascript using the Backbone framework together with a few other javascript libraries. The users data is stored in an external Mongo database for persistance. Data sent between the database and the backbone application (RESTful) is mediated by php-scripts.
 
 Following is a list of the libraries and extensions used by this application:
